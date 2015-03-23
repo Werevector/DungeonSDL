@@ -1,6 +1,7 @@
 #pragma once
 #include "TileMap.h"
-#include "Character.h"
+#include "CharacterPlayable.h"
+#include "CharacterNonPlayable.h"
 #include <vector>
 #include "ActMessage.h"
 
@@ -11,7 +12,8 @@ public:
 	~World(void);
 
 	void SetDungeonMap(TileMap* map);
-	void AddWorldCharacter(Character* character);
+	void AddWorldCharacter(CharacterPlayable* character);
+	void AddWorldNPCharacter(CharacterNonPlayable* character);
 	
 	//Character* getCharP();
 	
@@ -25,6 +27,8 @@ public:
 
 private:
 	TileMap *mDungeonMap;
-	vector<Character*> mCharacters;
+
+	vector<CharacterPlayable*> mCharacters;
+	vector<CharacterNonPlayable*> mNonPlayableCharacters;
 };
 

@@ -17,15 +17,10 @@ public:
 	void SetMapPosition(int x, int y);
 	void SetMapTilePositions(vector< vector<SDL_Rect> > tilePositions);
 
-	void Update();
+	virtual void Update() = 0;
+	virtual void Render() = 0;
 
-	vector <actMessage> message_Queue;
-
-	void Render();
-
-	void AddActMessage(actMessage);
-
-private:
+protected:
 	
 	int mMapX;
 	int mMapY;

@@ -17,7 +17,7 @@ void World::SetDungeonMap(TileMap* map){
 }
 
 
-void World::AddWorldCharacter(Character* character)
+void World::AddWorldCharacter(CharacterPlayable* character)
 {
 	mCharacters.push_back(character);
 }
@@ -25,7 +25,7 @@ void World::AddWorldCharacter(Character* character)
 
 void World::Update()
 {
-	for (vector<Character*>::iterator character = mCharacters.begin(); character != mCharacters.end(); ++character){
+	for (vector<CharacterPlayable*>::iterator character = mCharacters.begin(); character != mCharacters.end(); ++character){
 		(*character)->Update();
 	}
 }
