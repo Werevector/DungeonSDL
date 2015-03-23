@@ -15,6 +15,7 @@
 #include "Utils.h"
 #include "World.h"
 #include "CharacterPlayable.h"
+#include "CharacterNonPlayable.h"
 #include "ActMessage.h"
 
 using namespace std;
@@ -129,6 +130,12 @@ int main( int argc, char* args[] )
 		hero->SetMapTilePositions(tileMap->GetMapTilePositions());
 		hero->SetMapPosition(8, 2);
 		gWorld->AddWorldCharacter(hero);
+
+		CharacterNonPlayable* enemy;
+		enemy = new CharacterNonPlayable();
+		enemy->SetMapTilePositions(tileMap->GetMapTilePositions());
+		enemy->SetMapPosition(2, 6);
+		gWorld->AddWorldNPCharacter(enemy);
 
 		/***************************
 		****************************/
