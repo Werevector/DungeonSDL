@@ -47,6 +47,8 @@ public:
 	bool LoadAndBuildTileMap(string appPath);
 	vector< vector<SDL_Rect> > GetMapTilePositions();
 
+	vector< vector<bool> >* getCollisionMapP();
+
 	void Render();
 
 private:
@@ -54,6 +56,7 @@ private:
 	vector<Tile> mTileSet;
 	vector< vector<SDL_Rect> > mTilePostions;
 	Texture *mTileTextureAtlas;
+	vector< vector<bool> > collisionMap;
 
 };
 

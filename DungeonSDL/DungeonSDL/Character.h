@@ -16,6 +16,7 @@ public:
 
 	void SetMapPosition(int x, int y);
 	void SetMapTilePositions(vector< vector<SDL_Rect> > tilePositions);
+	void SetCollisionMap(vector< vector<bool> >*);
 
 	void Update();
 
@@ -30,11 +31,12 @@ private:
 	int mMapX;
 	int mMapY;
 
-	int mPosX;
-	int mPosY;
+	/*int mPosX;
+	int mPosY;*/
 
 	SDL_Rect mCharacter;
 
 	vector< vector<SDL_Rect> > mMapTilePositions;
+	vector< vector<bool> >* c_collisionMap;
 };
 

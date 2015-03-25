@@ -11,6 +11,8 @@ TileMap::TileMap(void)
 	{
 		mTilePostions.push_back(tempRectangles);
 	}
+
+	collisionMap = vector<std::vector<bool>>(LEVEL_TILE_WIDTH, std::vector<bool>(LEVEL_TILE_HEIGHT));
 }
 
 
@@ -65,6 +67,12 @@ bool TileMap::LoadAndBuildTileMap(string appPath)
 
 				SDL_Rect rect = {x + TILE_WIDTH / 2, y + TILE_HEIGHT / 2, 0, 0};
 				mTilePostions[xCounter][yCounter] = rect;
+				
+				if (tileType == TILE_WATER || tileType >= TILE_STATUE)
+				{
+					collisionMap[xCounter][yCounter] = true;
+				}
+				
 				//tempRectangles.push_back(rect);
 				if(xCounter < LEVEL_TILE_WIDTH - 1)
 				{
@@ -168,6 +176,10 @@ bool TileMap::LoadAndBuildTileMap(string appPath)
     //Close the file
     mapStream.close();
 
+	
+
+
+
     //If the map was loaded fine
     return tilesLoaded;
 }
@@ -184,6 +196,10 @@ vector< vector<SDL_Rect> > TileMap::GetMapTilePositions()
 	return mTilePostions;
 }
 
+vector< vector<bool> >* TileMap::getCollisionMapP(){
+	return &collisionMap;
+}
+
 
 void TileMap::Render()
 {
@@ -191,7 +207,20 @@ void TileMap::Render()
 	for( int i = 0; i < TOTAL_TILES; ++i )
 	{
 
+		//Texture rendTex = &mTileTextureClips[mTileSet[i].getType()];
+
 		SDL_Rect t = mTileSet[i].getBox();
+		
+		//Coloring un-passable terrain
+		/*if (mTileSet[i].getType() == TILE_WATER || mTileSet[i].getType() >= TILE_STATUE){
+			
+			mTileTextureAtlas->setColor(255, 50, 50);
+		}
+		else{
+			
+			mTileTextureAtlas->setColor(255, 255, 255);
+		}*/
+		
 		mTileTextureAtlas->renderBox( &t, &mTileTextureClips[ mTileSet[i].getType() ] );
 		
 	}

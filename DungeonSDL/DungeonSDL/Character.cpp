@@ -11,8 +11,8 @@ Character::Character(void)
 	mMapX = 0;
 	mMapY = 0;
 
-	mPosX = 0;
-	mPosY= 0;
+	/*mPosX = 0;
+	mPosY= 0;*/
 
 }
 
@@ -51,6 +51,10 @@ void Character::AddActMessage(actMessage new_msg){
 
 }
 
+void Character::SetCollisionMap(vector< vector<bool> >* collMap){
+	c_collisionMap = collMap;
+}
+
 
 void Character::Render()
 {
@@ -67,25 +71,25 @@ void Character::Update(){
 		switch (message->type){
 			
 		case MOVE_UPP:
-			if (! Utils::CoordsOutOfBounds(mMapX, mMapY - 1)){
+			if (! Utils::CoordsOutOfBounds(mMapX, mMapY - 1) && !(*c_collisionMap)[mMapX][mMapY-1]){
 				mMapY--;
-				cout << "UPP";
+				cout << "UP";
 			}
 			break;
 		case MOVE_DOWN:
-			if (! Utils::CoordsOutOfBounds(mMapX, mMapY + 1)){
+			if (!Utils::CoordsOutOfBounds(mMapX, mMapY + 1) && !(*c_collisionMap)[mMapX][mMapY + 1]){
 				mMapY++;
 				cout << "DOWN";
 			}
 			break;
 		case MOVE_LEFT:
-			if (! Utils::CoordsOutOfBounds(mMapX - 1, mMapY)){
+			if (!Utils::CoordsOutOfBounds(mMapX - 1, mMapY) && !(*c_collisionMap)[mMapX - 1][mMapY]){
 				mMapX--;
 				cout << "LEFT";
 			}
 			break;
 		case MOVE_RIGHT:
-			if (! Utils::CoordsOutOfBounds(mMapX + 1, mMapY)){
+			if (!Utils::CoordsOutOfBounds(mMapX + 1, mMapY) && !(*c_collisionMap)[mMapX + 1][mMapY]){
 				mMapX++;
 				cout << "RIGHT";
 			}

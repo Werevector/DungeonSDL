@@ -23,7 +23,11 @@ Textures gTileTextures;
 Texture gtex;
 GameTimer gTimer;
 World *gWorld;
+SDL_Event gEvent;
 //vector<Tile> *gTileSet;
+
+float keyTime = 0;
+const float keyDelay = 0.12;
 
 
 bool initSDL()
@@ -36,6 +40,8 @@ bool initSDL()
 	Graphics::gRenderer = SDL_CreateRenderer( Graphics::gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 	SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "best" );
+
+	
 
 	return success;
 }
@@ -63,36 +69,108 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 }
-
-void Update(const Uint8* keystate)
+int sum = 0;
+void Update(const Uint8* keystate, SDL_Event gEvent)
 {
-
+	
 	actMessage actorMessage;
+
+	//if (gEvent.key.repeat == 0){
+	//	switch (gEvent.type){
+
+		//case SDL_KEYDOWN:
+		//	switch (gEvent.key.keysym.sym)
+		//	{
+		//	case SDLK_LEFT:
+		//		if ( !(keyTime > 0)){
+		//			actorMessage.type = messageType::MOVE_LEFT;
+		//			gWorld->DelegateMSG(actorMessage);
+		//			keyTime = 1;
+		//		}
+		//		break;
+
+		//	case SDLK_RIGHT:
+		//		if (!(keyTime > 0))
+		//		{
+		//			actorMessage.type = messageType::MOVE_RIGHT;
+		//			gWorld->DelegateMSG(actorMessage);
+		//			keyTime = 1;
+		//		}
+		//		break;
+		//	case SDLK_UP:
+		//		if (!(keyTime > 0))
+		//		{
+		//			actorMessage.type = messageType::MOVE_UPP;
+		//			gWorld->DelegateMSG(actorMessage);
+		//			keyTime = 1;
+		//		}
+		//		break;
+		//	case SDLK_DOWN:
+		//		if (!(keyTime > 0))
+		//		{
+		//			actorMessage.type = messageType::MOVE_DOWN;
+		//			gWorld->DelegateMSG(actorMessage);
+		//			keyTime = 1;
+		//		}
+		//		break;
+		//	}
+		//	break;
+
+	//	}
+	//}
+
+	
+
 
 	if(keystate[SDL_SCANCODE_UP])
 	{
-		actorMessage.type = messageType::MOVE_UPP;
-		gWorld->DelegateMSG(actorMessage);
+		if (!(keyTime > 0))
+		{
+			actorMessage.type = messageType::MOVE_UPP;
+			gWorld->DelegateMSG(actorMessage);
+			keyTime = keyDelay;
+		}
 	}
 	
 	if(keystate[SDL_SCANCODE_DOWN])
 	{
-		actorMessage.type = messageType::MOVE_DOWN;
-		gWorld->DelegateMSG(actorMessage);
+		if (!(keyTime > 0))
+		{
+			actorMessage.type = messageType::MOVE_DOWN;
+			gWorld->DelegateMSG(actorMessage);
+			keyTime = keyDelay;
+		}
 	}
 	
 	if(keystate[SDL_SCANCODE_LEFT])
 	{
-		actorMessage.type = messageType::MOVE_LEFT;
-		gWorld->DelegateMSG(actorMessage);
+		if (!(keyTime > 0)){
+			actorMessage.type = messageType::MOVE_LEFT;
+			gWorld->DelegateMSG(actorMessage);
+			keyTime = keyDelay;
+		}
 	}
 
 	if(keystate[SDL_SCANCODE_RIGHT])
 	{
-		actorMessage.type = messageType::MOVE_RIGHT;
-		gWorld->DelegateMSG(actorMessage);
+		if (!(keyTime > 0))
+		{
+			actorMessage.type = messageType::MOVE_RIGHT;
+			gWorld->DelegateMSG(actorMessage);
+			keyTime = keyDelay;
+		}
 	}
 
+	if (keyTime > 0){
+		keyTime -= gTimer.DeltaTime();
+		cout << keyTime << "\n";
+		sum++;
+	}
+	else if (keyTime < 0){
+		keyTime = 0;
+		cout << "sum: " << sum;
+		sum = 0;
+	}
 
 	gWorld->Update();
 
@@ -137,18 +215,24 @@ int main( int argc, char* args[] )
 		bool quit = false;
 		while( !quit )
 		{
-			SDL_PumpEvents(); 
+			while (SDL_PollEvent(&gEvent) != 0){
+				if (gEvent.type == SDL_QUIT){
+					quit = true;
+				}
+			}//EventWhile
+
+
 
 			const Uint8* keystate = SDL_GetKeyboardState(NULL);
 
-			if (SDL_QuitRequested()){
+			/*if (SDL_QuitRequested()){
 				quit = true;
 				continue;
-			}
+			}*/
 
 			gTimer.Tick();
 
-			Update(keystate);
+			Update(keystate, gEvent);
 
 			SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 			SDL_RenderClear( Graphics::gRenderer );

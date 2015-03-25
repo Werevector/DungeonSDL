@@ -19,6 +19,7 @@ void World::SetDungeonMap(TileMap* map){
 
 void World::AddWorldCharacter(Character* character)
 {
+	character->SetCollisionMap(mDungeonMap->getCollisionMapP());
 	mCharacters.push_back(character);
 }
 
