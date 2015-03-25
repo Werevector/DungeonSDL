@@ -17,16 +17,22 @@ void World::SetDungeonMap(TileMap* map){
 }
 
 
-void World::AddWorldCharacter(Character* character)
+void World::AddWorldCharacter(CharacterPlayable* character)
 {
 	character->SetCollisionMap(mDungeonMap->getCollisionMapP());
 	mCharacters.push_back(character);
 }
 
 
+void World::AddWorldNPCharacter(CharacterNonPlayable* character)
+{
+	mNonPlayableCharacters.push_back(character);
+}
+
+
 void World::Update()
 {
-	for (vector<Character*>::iterator character = mCharacters.begin(); character != mCharacters.end(); ++character){
+	for (vector<CharacterPlayable*>::iterator character = mCharacters.begin(); character != mCharacters.end(); ++character){
 		(*character)->Update();
 	}
 }
@@ -38,6 +44,9 @@ void World::Render()
 
 	for(int i = 0; i < mCharacters.size(); i++)
 		mCharacters[i]->Render();
+
+	for (int i = 0; i < mNonPlayableCharacters.size(); i++)
+		mNonPlayableCharacters[i]->Render();
 }
 
 //Character* World::getCharP(){

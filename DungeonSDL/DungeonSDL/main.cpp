@@ -14,7 +14,8 @@
 #include "TileMap.h"
 #include "Utils.h"
 #include "World.h"
-#include "Character.h"
+#include "CharacterPlayable.h"
+#include "CharacterNonPlayable.h"
 #include "ActMessage.h"
 
 using namespace std;
@@ -202,11 +203,17 @@ int main( int argc, char* args[] )
 		tileMap->LoadAndBuildTileMap(Utils::GetApplicationPath());
 		gWorld->SetDungeonMap(tileMap);
 
-		Character* hero;
-		hero = new Character();
+		CharacterPlayable* hero;
+		hero = new CharacterPlayable();
 		hero->SetMapTilePositions(tileMap->GetMapTilePositions());
 		hero->SetMapPosition(8, 2);
 		gWorld->AddWorldCharacter(hero);
+
+		CharacterNonPlayable* enemy;
+		enemy = new CharacterNonPlayable();
+		enemy->SetMapTilePositions(tileMap->GetMapTilePositions());
+		enemy->SetMapPosition(2, 6);
+		gWorld->AddWorldNPCharacter(enemy);
 
 		/***************************
 		****************************/
