@@ -29,7 +29,7 @@ void CharacterNonPlayable::Render()
 }
 
 
-void CharacterNonPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
+void CharacterNonPlayable::Update(vector<CharacterPlayable*>& playerSet)
 {
 	for (vector<actMessage>::iterator message = message_Queue.begin(); message != message_Queue.end(); ++message){
 
@@ -37,6 +37,8 @@ void CharacterNonPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 		case ACTION_TAKE_DAMAGE:
 			CalcDamage(message->intParam);
 			damageTaken = true;
+		case REACT_TO_ACTION:
+			ReactToPlayerAction(playerSet);
 		case DEFAULT:
 			break;
 		}
@@ -51,36 +53,42 @@ void CharacterNonPlayable::ReactToPlayerAction(vector<CharacterPlayable*> player
 {
 	int deltaX = 0;
 	int deltaY = 0;
+	int newX = mMapX;
+	int newY = mMapY;
+	int playerX = 0;
+	int playerY = 0;
 
 	for (int i = 0; i < playerChars.size(); i++)
 	{
-		SDL_Rect playerTile = playerChars[i]->Get_CurrentTile();
+		playerX = playerChars[i]->getmMapX();
+		playerY = playerChars[i]->getmMapY();
 
-		if (mCurrentTile.x == playerTile.x)
+		if (mMapX == playerX)
 		{
-			deltaY = mCurrentTile.y - playerTile.y;
-			if (abs(deltaY) > 2)
+			deltaY = mMapY - playerY;
+			if (abs(deltaY) <= 3)
 			{
-				cout << endl << "X in range" << endl;
+				if (deltaY > 0)
+					newY--;
+				else if (deltaY < 0)
+					newY++;
 			}
 
 		}
-		else if (mCurrentTile.y == playerTile.y)
+		else if (mMapY == playerY)
 		{
-			deltaX = mCurrentTile.x - playerTile.x;
-			if (abs(deltaX) > 2)
+			deltaX = mMapX - playerX;
+			if (abs(deltaX) <= 3)
 			{
-				cout << endl << "Y in range" << endl;
+				if (deltaX > 0)
+					newX--;
+				else if (deltaX < 0)
+					newX++;
 			}
 		}
-
-		//int deltaX = mCurrentTile.x - playerTile.x;
-		//int deltaY = mCurrentTile.y - playerTile.y;
-
-		//h 8 2
-		//e 2 6
-		// -6 4
 	}
 
+	if (!(newX == playerX && newY == playerY))
+		SetMapPosition(newX, newY);
 
 }

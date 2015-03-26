@@ -46,22 +46,16 @@ void Character::SetMapTilePositions(vector< vector<SDL_Rect> > tilePositions)
 }
 
 
-SDL_Rect Character::Get_CurrentTile()
-{
-	return mCurrentTile;
-}
-
-
 void Character::SetCollisionMap(vector< vector<bool> >* collMap){
 	c_collisionMap = collMap;
 }
 
 
-void Character::Render()
-{
-	SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0x00, 0x00, 0xFF );		
-	SDL_RenderFillRect( Graphics::gRenderer, &mCharacter );
-}
+//void Character::Render()
+//{
+//	SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0x00, 0x00, 0xFF );		
+//	SDL_RenderFillRect( Graphics::gRenderer, &mCharacter );
+//}
 
 
 int Character::getmMapX(){

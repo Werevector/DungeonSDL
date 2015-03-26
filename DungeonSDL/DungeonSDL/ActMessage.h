@@ -10,6 +10,8 @@ enum messageType{
 	ACTION_ATTACK,
 	ACTION_TAKE_DAMAGE,
 
+	REACT_TO_ACTION,
+
 
 	DEFAULT
 

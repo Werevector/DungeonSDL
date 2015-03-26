@@ -1,6 +1,10 @@
 #pragma once
+
+class CharacterPlayable;
+
 #include "Character.h"
 #include "CharacterPlayable.h"
+
 class CharacterNonPlayable :
 	public Character
 {
@@ -8,10 +12,9 @@ public:
 	CharacterNonPlayable();
 	~CharacterNonPlayable();
 
-	void ReactToPlayerAction(vector<CharacterPlayable*> playerChars);
+	void Render();
+	void Update(vector<CharacterPlayable*>&);
 
-	virtual void Render();
-	virtual void Update(vector<CharacterNonPlayable*>&);
+	void ReactToPlayerAction(vector<CharacterPlayable*>);
 
 };
-

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SDL.h>
 #include "Graphics.h"
 #include <vector>
@@ -19,8 +20,8 @@ public:
 	void SetMapTilePositions(vector< vector<SDL_Rect> > tilePositions);
 	void SetCollisionMap(vector< vector<bool> >*);
 
-	virtual void Update(vector<CharacterNonPlayable*>&) = 0;
-	virtual void Render() = 0;
+	//virtual void Update(vector<CharacterNonPlayable*>&) = 0;
+	//virtual void Render() = 0;
 
 	int getmMapX();
 	int getmMapY();
@@ -54,4 +55,3 @@ protected:
 	void CalcDamage(int);
 
 };
-

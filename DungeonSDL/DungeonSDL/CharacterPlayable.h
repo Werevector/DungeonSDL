@@ -1,6 +1,10 @@
 #pragma once
+
+class CharacterNonPlayable;
+
 #include "Character.h"
 #include "CharacterNonPlayable.h"
+
 class CharacterPlayable :
 	public Character
 {
@@ -8,8 +12,8 @@ public:
 	CharacterPlayable();
 	~CharacterPlayable();
 
-	virtual void Render() override;
-	virtual void Update(vector<CharacterNonPlayable*>&) override;
+	void Render();
+	void Update(vector<CharacterNonPlayable*>&);
 
 	/*void AddActMessage(actMessage);*/
 
@@ -20,4 +24,3 @@ protected:
 	bool EnemyPresent(int, int, vector<CharacterNonPlayable*>);
 
 };
-

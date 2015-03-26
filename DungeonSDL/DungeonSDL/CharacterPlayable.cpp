@@ -35,7 +35,6 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 			{
 				if (!Utils::CoordsOutOfBounds(mMapX, mMapY - 1) && !(*c_collisionMap)[mMapX][mMapY - 1]){
 					mMapY--;
-					cout << "UP";
 				}
 			}
 			else{
@@ -50,7 +49,6 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 			{
 				if (!Utils::CoordsOutOfBounds(mMapX, mMapY + 1) && !(*c_collisionMap)[mMapX][mMapY + 1]){
 					mMapY++;
-					cout << "DOWN";
 				}
 			}else{
 				actorMessage.intParam = strength;
@@ -64,7 +62,6 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 			{
 				if (!Utils::CoordsOutOfBounds(mMapX - 1, mMapY) && !(*c_collisionMap)[mMapX - 1][mMapY]){
 					mMapX--;
-					cout << "LEFT";
 				}
 			}else{
 				actorMessage.intParam = strength;
@@ -78,7 +75,6 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 			{
 				if (!Utils::CoordsOutOfBounds(mMapX + 1, mMapY) && !(*c_collisionMap)[mMapX + 1][mMapY]){
 					mMapX++;
-					cout << "RIGHT";
 				}
 			}else{
 				actorMessage.intParam = strength;

@@ -37,7 +37,7 @@ void World::Update()
 	}
 
 	for (auto character = mNonPlayableCharacters.begin(); character != mNonPlayableCharacters.end(); ++character){
-		(*character)->Update(mNonPlayableCharacters);
+		(*character)->Update(mCharacters);
 	}
 
 	/*for (auto character = mNonPlayableCharacters.begin(); character != mNonPlayableCharacters.end(); ++character){
@@ -51,6 +51,7 @@ void World::Update()
 		if (mNonPlayableCharacters[i]->IsDead()){
 			mNonPlayableCharacters.erase(mNonPlayableCharacters.begin() + i);
 		}
+
 	}
 
 
@@ -76,7 +77,12 @@ void World::DelegateMSG(actMessage message){
 
 	mCharacters[0]->AddActMessage(message);
 
-	for (int i = 0; i < mNonPlayableCharacters.size(); i++)
-		mNonPlayableCharacters[i]->ReactToPlayerAction(mCharacters);
+	if (message.type == messageType::MOVE_DOWN || message.type == messageType::MOVE_UPP || message.type == messageType::MOVE_LEFT || message.type == messageType::MOVE_RIGHT)
+	{
+		actMessage actorMessage;
+		actorMessage.type = messageType::REACT_TO_ACTION;
+		for (int i = 0; i < mNonPlayableCharacters.size(); i++)
+			mNonPlayableCharacters[i]->AddActMessage(actorMessage);
+	}
 
 }
