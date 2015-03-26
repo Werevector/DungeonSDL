@@ -28,25 +28,25 @@ void CharacterPlayable::Update()
 		case MOVE_UPP:
 			if (!Utils::CoordsOutOfBounds(mMapX, mMapY - 1) && !(*c_collisionMap)[mMapX][mMapY - 1]){
 				mMapY--;
-				cout << "UP";
+				cout << "UP" << endl;
 			}
 			break;
 		case MOVE_DOWN:
 			if (!Utils::CoordsOutOfBounds(mMapX, mMapY + 1) && !(*c_collisionMap)[mMapX][mMapY + 1]){
 				mMapY++;
-				cout << "DOWN";
+				cout << "DOWN" << endl;
 			}
 			break;
 		case MOVE_LEFT:
 			if (!Utils::CoordsOutOfBounds(mMapX - 1, mMapY) && !(*c_collisionMap)[mMapX - 1][mMapY]){
 				mMapX--;
-				cout << "LEFT";
+				cout << "LEFT" << endl;
 			}
 			break;
 		case MOVE_RIGHT:
 			if (!Utils::CoordsOutOfBounds(mMapX + 1, mMapY) && !(*c_collisionMap)[mMapX + 1][mMapY]){
 				mMapX++;
-				cout << "RIGHT";
+				cout << "RIGHT" << endl;
 			}
 			break;
 		case DEFAULT:

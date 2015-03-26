@@ -57,4 +57,7 @@ void World::DelegateMSG(actMessage message){
 
 	mCharacters[0]->AddActMessage(message);
 
+	for (int i = 0; i < mNonPlayableCharacters.size(); i++)
+		mNonPlayableCharacters[i]->ReactToPlayerAction(mCharacters);
+
 }

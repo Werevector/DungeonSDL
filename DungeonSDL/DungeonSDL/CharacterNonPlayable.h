@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include "CharacterPlayable.h"
 class CharacterNonPlayable :
 	public Character
 {
@@ -9,5 +10,7 @@ public:
 
 	virtual void Render() override;
 	virtual void Update() override;
+
+	void ReactToPlayerAction(vector<CharacterPlayable*> playerChars);
 };
 
