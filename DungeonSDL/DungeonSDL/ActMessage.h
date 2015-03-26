@@ -6,6 +6,11 @@ enum messageType{
 	MOVE_DOWN,
 	MOVE_LEFT,
 	MOVE_RIGHT,
+
+	ACTION_ATTACK,
+	ACTION_TAKE_DAMAGE,
+
+
 	DEFAULT
 
 };
