@@ -11,6 +11,9 @@ Character::Character(void)
 	mMapX = 0;
 	mMapY = 0;
 
+	health = 5;
+	IS_DEAD = false;
+
 	/*mPosX = 0;
 	mPosY= 0;*/
 
@@ -22,7 +25,7 @@ Character::~Character(void)
 
 }
 
-//Skriv om, ser ikkje koffor dan e dar
+
 void Character::SetMapPosition(int x, int y)
 {
 	mMapX = x;
@@ -54,3 +57,26 @@ void Character::Render()
 	SDL_RenderFillRect( Graphics::gRenderer, &mCharacter );
 }
 
+int Character::getmMapX(){
+	return mMapX;
+}
+
+int Character::getmMapY(){
+	return mMapY;
+}
+
+void Character::CalcDamage(int damage){
+	health -= damage;
+	if (health < 0){
+		IS_DEAD = true;
+	}
+}
+
+void Character::AddActMessage(actMessage new_msg)
+{
+	message_Queue.push_back(new_msg);
+}
+
+bool Character::IsDead(){
+	return IS_DEAD;
+}

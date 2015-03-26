@@ -76,53 +76,6 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 	
 	actMessage actorMessage;
 
-	//if (gEvent.key.repeat == 0){
-	//	switch (gEvent.type){
-
-		//case SDL_KEYDOWN:
-		//	switch (gEvent.key.keysym.sym)
-		//	{
-		//	case SDLK_LEFT:
-		//		if ( !(keyTime > 0)){
-		//			actorMessage.type = messageType::MOVE_LEFT;
-		//			gWorld->DelegateMSG(actorMessage);
-		//			keyTime = 1;
-		//		}
-		//		break;
-
-		//	case SDLK_RIGHT:
-		//		if (!(keyTime > 0))
-		//		{
-		//			actorMessage.type = messageType::MOVE_RIGHT;
-		//			gWorld->DelegateMSG(actorMessage);
-		//			keyTime = 1;
-		//		}
-		//		break;
-		//	case SDLK_UP:
-		//		if (!(keyTime > 0))
-		//		{
-		//			actorMessage.type = messageType::MOVE_UPP;
-		//			gWorld->DelegateMSG(actorMessage);
-		//			keyTime = 1;
-		//		}
-		//		break;
-		//	case SDLK_DOWN:
-		//		if (!(keyTime > 0))
-		//		{
-		//			actorMessage.type = messageType::MOVE_DOWN;
-		//			gWorld->DelegateMSG(actorMessage);
-		//			keyTime = 1;
-		//		}
-		//		break;
-		//	}
-		//	break;
-
-	//	}
-	//}
-
-	
-
-
 	if(keystate[SDL_SCANCODE_UP])
 	{
 		if (!(keyTime > 0))
@@ -164,12 +117,10 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 
 	if (keyTime > 0){
 		keyTime -= gTimer.DeltaTime();
-		cout << keyTime << "\n";
 		sum++;
 	}
 	else if (keyTime < 0){
 		keyTime = 0;
-		cout << "sum: " << sum;
 		sum = 0;
 	}
 
@@ -214,6 +165,12 @@ int main( int argc, char* args[] )
 		enemy->SetMapTilePositions(tileMap->GetMapTilePositions());
 		enemy->SetMapPosition(2, 6);
 		gWorld->AddWorldNPCharacter(enemy);
+
+		CharacterNonPlayable* enemy2;
+		enemy2 = new CharacterNonPlayable();
+		enemy2->SetMapTilePositions(tileMap->GetMapTilePositions());
+		enemy2->SetMapPosition(3, 7);
+		gWorld->AddWorldNPCharacter(enemy2);
 
 		/***************************
 		****************************/

@@ -7,7 +7,9 @@ public:
 	CharacterNonPlayable();
 	~CharacterNonPlayable();
 
-	virtual void Render() override;
-	virtual void Update() override;
+	virtual void Render();
+	virtual void Update(vector<CharacterNonPlayable*>&);
+
+
 };
 

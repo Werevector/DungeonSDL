@@ -33,8 +33,27 @@ void World::AddWorldNPCharacter(CharacterNonPlayable* character)
 void World::Update()
 {
 	for (vector<CharacterPlayable*>::iterator character = mCharacters.begin(); character != mCharacters.end(); ++character){
-		(*character)->Update();
+		(*character)->Update(mNonPlayableCharacters);
 	}
+
+	for (auto character = mNonPlayableCharacters.begin(); character != mNonPlayableCharacters.end(); ++character){
+		(*character)->Update(mNonPlayableCharacters);
+	}
+
+	/*for (auto character = mNonPlayableCharacters.begin(); character != mNonPlayableCharacters.end(); ++character){
+		if ((*character)->IsDead()){
+			mNonPlayableCharacters.erase(character);
+		}
+	}*/
+
+	for (int i = 0; i < mNonPlayableCharacters.size(); i++){
+
+		if (mNonPlayableCharacters[i]->IsDead()){
+			mNonPlayableCharacters.erase(mNonPlayableCharacters.begin() + i);
+		}
+	}
+
+
 }
 
 
