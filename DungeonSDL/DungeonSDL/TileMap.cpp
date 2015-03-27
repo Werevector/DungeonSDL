@@ -21,7 +21,7 @@ TileMap::~TileMap(void)
 }
 
 
-bool TileMap::LoadAndBuildTileMap(string appPath)
+bool TileMap::LoadAndBuildTileMap(string path)
 {
 	bool tilesLoaded = true;
 	Tile *tile = 0;
@@ -33,7 +33,7 @@ bool TileMap::LoadAndBuildTileMap(string appPath)
     //The tile offsets
     int x = 0, y = 0;
 
-    ifstream mapStream( appPath + "/dungeon.map" );
+    ifstream mapStream( path );
 
     if( !mapStream.is_open())
     {

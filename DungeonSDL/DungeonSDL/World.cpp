@@ -3,6 +3,9 @@
 
 World::World(void)
 {
+
+	gTileTextures.LoadTextures();
+
 }
 
 
@@ -14,6 +17,30 @@ World::~World(void)
 void World::SetDungeonMap(TileMap* map){
 
 	mDungeonMap = map;
+}
+
+bool World::LoadDungeon(string dungeonPath){
+	mDungeon.LoadStructure(dungeonPath, gTileTextures);
+	mDungeonMap = mDungeon.getStart();
+
+	CharacterPlayable* hero;
+	hero = new CharacterPlayable();
+	hero->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
+	hero->SetMapPosition(8, 2);
+	AddWorldCharacter(hero);
+
+	CharacterNonPlayable* enemy;
+	enemy = new CharacterNonPlayable();
+	enemy->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
+	enemy->SetMapPosition(2, 6);
+	AddWorldNPCharacter(enemy);
+
+	CharacterNonPlayable* enemy2;
+	enemy2 = new CharacterNonPlayable();
+	enemy2->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
+	enemy2->SetMapPosition(3, 7);
+	AddWorldNPCharacter(enemy2);
+
 }
 
 
@@ -39,12 +66,6 @@ void World::Update()
 	for (auto character = mNonPlayableCharacters.begin(); character != mNonPlayableCharacters.end(); ++character){
 		(*character)->Update(mCharacters);
 	}
-
-	/*for (auto character = mNonPlayableCharacters.begin(); character != mNonPlayableCharacters.end(); ++character){
-		if ((*character)->IsDead()){
-			mNonPlayableCharacters.erase(character);
-		}
-	}*/
 
 	for (int i = 0; i < mNonPlayableCharacters.size(); i++){
 

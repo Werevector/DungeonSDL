@@ -51,12 +51,19 @@ public:
 
 	void Render();
 
+	//Links
+	int up;
+	int down;
+	int left;
+	int right;
+
 private:
 	SDL_Rect mTileTextureClips[ TOTAL_TILE_SPRITES ];
 	vector<Tile> mTileSet;
 	vector< vector<SDL_Rect> > mTilePostions;
 	Texture *mTileTextureAtlas;
 	vector< vector<bool> > collisionMap;
+
 
 };
 

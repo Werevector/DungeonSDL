@@ -73,6 +73,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterNonPlayable.h" />
     <ClInclude Include="CharacterPlayable.h" />
+    <ClInclude Include="DungeonStructure.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Graphics.h" />
@@ -87,6 +88,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterNonPlayable.cpp" />
     <ClCompile Include="CharacterPlayable.cpp" />
+    <ClCompile Include="DungeonStructure.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Graphics.cpp" />

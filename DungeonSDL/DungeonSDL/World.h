@@ -4,6 +4,8 @@
 #include "CharacterNonPlayable.h"
 #include <vector>
 #include "ActMessage.h"
+#include "DungeonStructure.h"
+#include "Textures.h"
 
 class World
 {
@@ -11,7 +13,9 @@ public:
 	World(void);
 	~World(void);
 
-	void SetDungeonMap(TileMap* map);
+
+	bool LoadDungeon(string);
+	
 	void AddWorldCharacter(CharacterPlayable* character);
 	void AddWorldNPCharacter(CharacterNonPlayable* character);
 	
@@ -26,7 +30,12 @@ public:
 
 
 private:
+	
+	void SetDungeonMap(TileMap* map);
+	DungeonStructure mDungeon;
 	TileMap *mDungeonMap;
+
+	Textures gTileTextures;
 
 	vector<CharacterPlayable*> mCharacters;
 	vector<CharacterNonPlayable*> mNonPlayableCharacters;

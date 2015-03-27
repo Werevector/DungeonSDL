@@ -143,16 +143,12 @@ int main( int argc, char* args[] )
 		loadMedia();
 
 		gWorld = new World();
-
+		
 		/***************************
 		Manual object init for testing
 		****************************/
 
-		TileMap* tileMap;
-		tileMap = new TileMap();
-		tileMap->SetTileTexture(*gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32));
-		tileMap->LoadAndBuildTileMap(Utils::GetApplicationPath());
-		gWorld->SetDungeonMap(tileMap);
+		gWorld->LoadDungeon("dummy");
 
 		CharacterPlayable* hero;
 		hero = new CharacterPlayable();
