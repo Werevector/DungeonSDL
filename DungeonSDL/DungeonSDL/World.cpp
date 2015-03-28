@@ -17,6 +17,7 @@ World::~World(void)
 void World::SetDungeonMap(TileMap* map){
 
 	mDungeonMap = map;
+	mCharacters[0]->SetCollisionMap(mDungeonMap->getCollisionMapP());
 }
 
 bool World::LoadDungeon(string dungeonPath){
@@ -40,6 +41,8 @@ bool World::LoadDungeon(string dungeonPath){
 	enemy2->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
 	enemy2->SetMapPosition(3, 7);
 	AddWorldNPCharacter(enemy2);
+
+	return true;
 
 }
 
@@ -71,6 +74,37 @@ void World::Update()
 
 		if (mNonPlayableCharacters[i]->IsDead()){
 			mNonPlayableCharacters.erase(mNonPlayableCharacters.begin() + i);
+		}
+
+	}
+
+	if (MAP_SWITCH){
+
+		switch (lDir){
+
+		case UP:
+			SetDungeonMap(mDungeon.getMap(mDungeonMap->up));
+			mCharacters[0]->FlipY();
+			MAP_SWITCH = false;
+			break;
+		case DOWN:
+			SetDungeonMap(mDungeon.getMap(mDungeonMap->down));
+			mCharacters[0]->FlipY();
+			MAP_SWITCH = false;
+			break;
+		case LEFT:
+			SetDungeonMap(mDungeon.getMap(mDungeonMap->left));
+			mCharacters[0]->FlipX();
+			MAP_SWITCH = false;
+			break;
+		case RIGHT:
+			SetDungeonMap(mDungeon.getMap(mDungeonMap->right));
+			mCharacters[0]->FlipX();
+			MAP_SWITCH = false;
+			break;
+		default:
+			break;
+
 		}
 
 	}

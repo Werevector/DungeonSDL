@@ -6,6 +6,7 @@
 #include "ActMessage.h"
 #include "DungeonStructure.h"
 #include "Textures.h"
+#include "GameState.h"
 
 class World
 {

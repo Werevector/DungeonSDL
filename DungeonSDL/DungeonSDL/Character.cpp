@@ -66,6 +66,14 @@ int Character::getmMapY(){
 	return mMapY;
 }
 
+void Character::FlipX(){
+	mMapX = abs( mMapX - TileMap::LEVEL_TILE_WIDTH + 1 );
+}
+
+void Character::FlipY(){
+	mMapY = abs( mMapY - TileMap::LEVEL_TILE_HEIGHT + 1 );
+}
+
 void Character::CalcDamage(int damage){
 	health -= damage;
 	if (health < 0){

@@ -18,6 +18,8 @@
 #include "CharacterNonPlayable.h"
 #include "ActMessage.h"
 
+#include "GameState.h"
+
 using namespace std;
 
 Textures gTileTextures;
@@ -150,7 +152,7 @@ int main( int argc, char* args[] )
 
 		gWorld->LoadDungeon("dummy");
 
-		CharacterPlayable* hero;
+		/*CharacterPlayable* hero;
 		hero = new CharacterPlayable();
 		hero->SetMapTilePositions(tileMap->GetMapTilePositions());
 		hero->SetMapPosition(8, 2);
@@ -166,7 +168,7 @@ int main( int argc, char* args[] )
 		enemy2 = new CharacterNonPlayable();
 		enemy2->SetMapTilePositions(tileMap->GetMapTilePositions());
 		enemy2->SetMapPosition(3, 7);
-		gWorld->AddWorldNPCharacter(enemy2);
+		gWorld->AddWorldNPCharacter(enemy2);*/
 
 		/***************************
 		****************************/

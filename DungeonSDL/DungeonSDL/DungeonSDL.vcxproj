@@ -75,6 +75,7 @@
     <ClInclude Include="CharacterPlayable.h" />
     <ClInclude Include="DungeonStructure.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Texture.h" />
@@ -90,6 +91,7 @@
     <ClCompile Include="CharacterPlayable.cpp" />
     <ClCompile Include="DungeonStructure.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />

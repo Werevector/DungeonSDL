@@ -27,7 +27,7 @@ bool Textures::LoadTextures()
 	appPath += "\\assets\\";
 
 	mTextures.push_back(LoadTexture(appPath + "texture_atlas1.png"));
-	mTextures.push_back(LoadTexture(appPath + "texture_atlas2.png"));
+	mTextures.push_back(LoadTexture(appPath + "SpartanSet.png"));
 
 	return mSuccess;
 }

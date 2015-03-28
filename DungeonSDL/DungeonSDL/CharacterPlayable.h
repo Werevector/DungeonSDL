@@ -4,6 +4,7 @@ class CharacterNonPlayable;
 
 #include "Character.h"
 #include "CharacterNonPlayable.h"
+#include "GameState.h"
 
 class CharacterPlayable :
 	public Character

@@ -33,8 +33,14 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 
 			if (!EnemyPresent(mMapX, (mMapY - 1), npcSet))
 			{
-				if (!Utils::CoordsOutOfBounds(mMapX, mMapY - 1) && !(*c_collisionMap)[mMapX][mMapY - 1]){
-					mMapY--;
+				if(!Utils::CoordsOutOfBounds(mMapX, mMapY - 1)){
+					if (!(*c_collisionMap)[mMapX][mMapY - 1]){
+						mMapY--;
+					}
+				}
+				else{
+					MAP_SWITCH = true;
+					lDir = UP;
 				}
 			}
 			else{
@@ -47,8 +53,13 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 		case MOVE_DOWN:
 			if (!EnemyPresent(mMapX, (mMapY + 1), npcSet))
 			{
-				if (!Utils::CoordsOutOfBounds(mMapX, mMapY + 1) && !(*c_collisionMap)[mMapX][mMapY + 1]){
-					mMapY++;
+				if (!Utils::CoordsOutOfBounds(mMapX, mMapY + 1)){
+					if (!(*c_collisionMap)[mMapX][mMapY + 1]){
+						mMapY++;
+					}
+				}else{
+					MAP_SWITCH = true;
+					lDir = DOWN;
 				}
 			}else{
 				actorMessage.intParam = strength;
@@ -60,8 +71,14 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 		case MOVE_LEFT:
 			if (!EnemyPresent(mMapX - 1 , mMapY, npcSet))
 			{
-				if (!Utils::CoordsOutOfBounds(mMapX - 1, mMapY) && !(*c_collisionMap)[mMapX - 1][mMapY]){
-					mMapX--;
+				if (!Utils::CoordsOutOfBounds(mMapX - 1, mMapY)){
+					if (!(*c_collisionMap)[mMapX - 1][mMapY]){
+						mMapX--;
+					}
+				}
+				else{
+					MAP_SWITCH = true;
+					lDir = LEFT;
 				}
 			}else{
 				actorMessage.intParam = strength;
@@ -73,8 +90,14 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 		case MOVE_RIGHT:
 			if (!EnemyPresent(mMapX + 1, mMapY, npcSet))
 			{
-				if (!Utils::CoordsOutOfBounds(mMapX + 1, mMapY) && !(*c_collisionMap)[mMapX + 1][mMapY]){
-					mMapX++;
+				if (!Utils::CoordsOutOfBounds(mMapX + 1, mMapY)){
+					if (!(*c_collisionMap)[mMapX + 1][mMapY]){
+						mMapX++;
+					}
+				}
+				else{
+					MAP_SWITCH = true;
+					lDir = RIGHT;
 				}
 			}else{
 				actorMessage.intParam = strength;

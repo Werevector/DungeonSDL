@@ -6,6 +6,7 @@
 #include "ActMessage.h"
 #include <iostream>
 #include "Utils.h"
+#include <cmath>
 
 using namespace std;
 class CharacterNonPlayable;
@@ -27,6 +28,9 @@ public:
 	int getmMapY();
 
 	void AddActMessage(actMessage);
+
+	void FlipX();
+	void FlipY();
 
 	bool IsDead();
 

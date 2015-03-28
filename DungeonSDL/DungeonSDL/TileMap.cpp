@@ -212,14 +212,15 @@ void TileMap::Render()
 		SDL_Rect t = mTileSet[i].getBox();
 		
 		//Coloring un-passable terrain
-		//if (mTileSet[i].getType() == TILE_WATER || mTileSet[i].getType() >= TILE_STATUE){
-		//	
-		//	mTileTextureAtlas->setColor(255, 50, 50);
-		//}
-		//else{
-		//	
-		//	mTileTextureAtlas->setColor(255, 255, 255);
-		//}
+
+		/*if (mTileSet[i].getType() == TILE_WATER || mTileSet[i].getType() >= TILE_STATUE){
+			
+			mTileTextureAtlas->setColor(255, 50, 50);
+		}
+		else{
+			
+			mTileTextureAtlas->setColor(255, 255, 255);
+		}*/
 		
 		mTileTextureAtlas->renderBox( &t, &mTileTextureClips[ mTileSet[i].getType() ] );
 		
