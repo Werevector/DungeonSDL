@@ -39,6 +39,6 @@ private:
 	Textures gTileTextures;
 
 	vector<CharacterPlayable*> mCharacters;
-	vector<CharacterNonPlayable*> mNonPlayableCharacters;
+	vector<CharacterNonPlayable*>* mNonPlayableCharacters;
 };
 

@@ -5,6 +5,7 @@ World::World(void)
 {
 
 	gTileTextures.LoadTextures();
+	mNonPlayableCharacters = new vector < CharacterNonPlayable* > ;
 
 }
 
@@ -23,6 +24,7 @@ void World::SetDungeonMap(TileMap* map){
 bool World::LoadDungeon(string dungeonPath){
 	mDungeon.LoadStructure(dungeonPath, gTileTextures);
 	mDungeonMap = mDungeon.getStart();
+	mNonPlayableCharacters = mDungeonMap->getNPCListP();
 
 	CharacterPlayable* hero;
 	hero = new CharacterPlayable();
@@ -30,7 +32,7 @@ bool World::LoadDungeon(string dungeonPath){
 	hero->SetMapPosition(8, 2);
 	AddWorldCharacter(hero);
 
-	CharacterNonPlayable* enemy;
+	/*CharacterNonPlayable* enemy;
 	enemy = new CharacterNonPlayable();
 	enemy->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
 	enemy->SetMapPosition(2, 6);
@@ -40,7 +42,7 @@ bool World::LoadDungeon(string dungeonPath){
 	enemy2 = new CharacterNonPlayable();
 	enemy2->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
 	enemy2->SetMapPosition(3, 7);
-	AddWorldNPCharacter(enemy2);
+	AddWorldNPCharacter(enemy2);*/
 
 	return true;
 
@@ -56,24 +58,24 @@ void World::AddWorldCharacter(CharacterPlayable* character)
 
 void World::AddWorldNPCharacter(CharacterNonPlayable* character)
 {
-	mNonPlayableCharacters.push_back(character);
+	mNonPlayableCharacters->push_back(character);
 }
 
 
 void World::Update()
 {
 	for (vector<CharacterPlayable*>::iterator character = mCharacters.begin(); character != mCharacters.end(); ++character){
-		(*character)->Update(mNonPlayableCharacters);
+		(*character)->Update(*mNonPlayableCharacters);
 	}
 
-	for (auto character = mNonPlayableCharacters.begin(); character != mNonPlayableCharacters.end(); ++character){
+	for (auto character = mNonPlayableCharacters->begin(); character != mNonPlayableCharacters->end(); ++character){
 		(*character)->Update(mCharacters);
 	}
 
-	for (int i = 0; i < mNonPlayableCharacters.size(); i++){
+	for (int i = 0; i < mNonPlayableCharacters->size(); i++){
 
-		if (mNonPlayableCharacters[i]->IsDead()){
-			mNonPlayableCharacters.erase(mNonPlayableCharacters.begin() + i);
+		if ((*mNonPlayableCharacters)[i]->IsDead()){
+			mNonPlayableCharacters->erase(mNonPlayableCharacters->begin() + i);
 		}
 
 	}
@@ -85,21 +87,25 @@ void World::Update()
 		case UP:
 			SetDungeonMap(mDungeon.getMap(mDungeonMap->up));
 			mCharacters[0]->FlipY();
+			mNonPlayableCharacters = mDungeonMap->getNPCListP();
 			MAP_SWITCH = false;
 			break;
 		case DOWN:
 			SetDungeonMap(mDungeon.getMap(mDungeonMap->down));
 			mCharacters[0]->FlipY();
+			mNonPlayableCharacters = mDungeonMap->getNPCListP();
 			MAP_SWITCH = false;
 			break;
 		case LEFT:
 			SetDungeonMap(mDungeon.getMap(mDungeonMap->left));
 			mCharacters[0]->FlipX();
+			mNonPlayableCharacters = mDungeonMap->getNPCListP();
 			MAP_SWITCH = false;
 			break;
 		case RIGHT:
 			SetDungeonMap(mDungeon.getMap(mDungeonMap->right));
 			mCharacters[0]->FlipX();
+			mNonPlayableCharacters = mDungeonMap->getNPCListP();
 			MAP_SWITCH = false;
 			break;
 		default:
@@ -120,8 +126,8 @@ void World::Render()
 	for(int i = 0; i < mCharacters.size(); i++)
 		mCharacters[i]->Render();
 
-	for (int i = 0; i < mNonPlayableCharacters.size(); i++)
-		mNonPlayableCharacters[i]->Render();
+	for (int i = 0; i < mNonPlayableCharacters->size(); i++)
+		(*mNonPlayableCharacters)[i]->Render();
 }
 
 //Character* World::getCharP(){
@@ -136,8 +142,8 @@ void World::DelegateMSG(actMessage message){
 	{
 		actMessage actorMessage;
 		actorMessage.type = messageType::REACT_TO_ACTION;
-		for (int i = 0; i < mNonPlayableCharacters.size(); i++)
-			mNonPlayableCharacters[i]->AddActMessage(actorMessage);
+		for (int i = 0; i < mNonPlayableCharacters->size(); i++)
+			(*mNonPlayableCharacters)[i]->AddActMessage(actorMessage);
 	}
 
 }

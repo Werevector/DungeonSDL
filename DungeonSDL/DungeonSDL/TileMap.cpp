@@ -200,6 +200,13 @@ vector< vector<bool> >* TileMap::getCollisionMapP(){
 	return &collisionMap;
 }
 
+vector<CharacterNonPlayable*>* TileMap::getNPCListP(){
+	return &NPCList;
+}
+
+void TileMap::addNPC(CharacterNonPlayable* newNPC){
+	NPCList.push_back(newNPC);
+}
 
 void TileMap::Render()
 {

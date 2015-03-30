@@ -3,12 +3,12 @@
 #include <SDL_image.h>
 #include <vector>
 #include <fstream>
-
 #include "Tile.h"
 #include "Texture.h"
 
 using namespace std;
 
+class CharacterNonPlayable;
 
 class TileMap
 {
@@ -57,13 +57,16 @@ public:
 	int left;
 	int right;
 
+	vector<CharacterNonPlayable*>* getNPCListP();
+	void addNPC(CharacterNonPlayable*);
+
 private:
 	SDL_Rect mTileTextureClips[ TOTAL_TILE_SPRITES ];
 	vector<Tile> mTileSet;
 	vector< vector<SDL_Rect> > mTilePostions;
 	Texture *mTileTextureAtlas;
 	vector< vector<bool> > collisionMap;
-
+	vector<CharacterNonPlayable*> NPCList;
 
 };
 

@@ -1,11 +1,14 @@
 #pragma once
+class CharacterNonPlayable;
 #include <vector>
 #include <map>
 #include <string>
 #include "TileMap.h"
 #include "Textures.h"
+#include "CharacterNonPlayable.h"
 
 using namespace std;
+
 class DungeonStructure{
 
 
