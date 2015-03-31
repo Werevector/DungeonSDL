@@ -13,6 +13,7 @@ TileMap::TileMap(void)
 	}
 
 	collisionMap = vector<std::vector<bool>>(LEVEL_TILE_WIDTH, std::vector<bool>(LEVEL_TILE_HEIGHT));
+	mLightPassageMap = vector<std::vector<bool>>(LEVEL_TILE_WIDTH, std::vector<bool>(LEVEL_TILE_HEIGHT));
 }
 
 
@@ -69,9 +70,10 @@ bool TileMap::LoadAndBuildTileMap(string path)
 				mTilePostions[xCounter][yCounter] = rect;
 				
 				if (tileType == TILE_WATER || tileType >= TILE_STATUE)
-				{
 					collisionMap[xCounter][yCounter] = true;
-				}
+
+				if ((tileType >= TILE_STATUE))
+					mLightPassageMap[xCounter][yCounter] = true;
 				
 				//tempRectangles.push_back(rect);
 				if(xCounter < LEVEL_TILE_WIDTH - 1)
@@ -200,11 +202,16 @@ vector< vector<bool> >* TileMap::getCollisionMapP(){
 	return &collisionMap;
 }
 
+vector< vector<bool> >* TileMap::getLightPassageMapP(){
+	return &mLightPassageMap;
+}
+
 vector<CharacterNonPlayable*>* TileMap::getNPCListP(){
 	return &NPCList;
 }
 
 void TileMap::addNPC(CharacterNonPlayable* newNPC){
+	//newNPC->setLightPassableMap(&mLightPassageMap);
 	NPCList.push_back(newNPC);
 }
 
@@ -221,14 +228,20 @@ void TileMap::Render(vector< vector<bool> >* playerVision)
 		int x = (i) % LEVEL_TILE_HEIGHT;
 		int y = floor(i / LEVEL_TILE_HEIGHT);
 
-		if ( (*playerVision)[x][y]){
-			
+		if ( (*playerVision)[x][y]){	
 			
 			mTileTextureAtlas->setColor(200, 200, 200);
 		}
 		else{
 			mTileTextureAtlas->setColor(100, 100, 100);
 		}
+
+		//Color NPC vision
+		
+		/*for (int i = 0; i < NPCList.size(); i++){
+			if ( (*NPCList[i]->getVisionMapP())[x][y] )
+				mTileTextureAtlas->setColor(100, 0, 0);
+		}*/
 		
 		mTileTextureAtlas->renderBox( &t, &mTileTextureClips[ mTileSet[i].getType() ] );
 		

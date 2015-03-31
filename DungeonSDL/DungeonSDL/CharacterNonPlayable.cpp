@@ -31,6 +31,7 @@ void CharacterNonPlayable::Render()
 
 void CharacterNonPlayable::Update(vector<CharacterPlayable*>& playerSet)
 {
+	
 	for (vector<actMessage>::iterator message = message_Queue.begin(); message != message_Queue.end(); ++message){
 
 		switch (message->type){
@@ -45,6 +46,7 @@ void CharacterNonPlayable::Update(vector<CharacterPlayable*>& playerSet)
 	}
 
 	message_Queue.clear();
+	//CalcVision();
 
 }
 

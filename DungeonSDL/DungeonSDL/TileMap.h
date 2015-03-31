@@ -6,9 +6,10 @@
 #include "Tile.h"
 #include "Texture.h"
 
-using namespace std;
-
 class CharacterNonPlayable;
+//#include "CharacterNonPlayable.h"
+
+using namespace std;
 
 class TileMap
 {
@@ -48,6 +49,7 @@ public:
 	vector< vector<SDL_Rect> > GetMapTilePositions();
 
 	vector< vector<bool> >* getCollisionMapP();
+	vector< vector<bool> >* getLightPassageMapP();
 
 	void Render(vector< vector<bool> >*);
 
@@ -63,9 +65,13 @@ public:
 private:
 	SDL_Rect mTileTextureClips[ TOTAL_TILE_SPRITES ];
 	vector<Tile> mTileSet;
-	vector< vector<SDL_Rect> > mTilePostions;
+	
 	Texture *mTileTextureAtlas;
+
+	vector< vector<SDL_Rect> > mTilePostions;
 	vector< vector<bool> > collisionMap;
+	vector< vector<bool> > mLightPassageMap;
+	
 	vector<CharacterNonPlayable*> NPCList;
 
 };

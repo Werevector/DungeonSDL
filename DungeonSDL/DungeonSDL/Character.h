@@ -34,6 +34,7 @@ public:
 
 	bool IsDead();
 	vector< vector<bool> >* getVisionMapP();
+	void setLightPassableMap(vector< vector<bool> >*);
 	vector <actMessage> message_Queue;
 
 protected:
@@ -55,6 +56,7 @@ protected:
 
 	vector< vector<SDL_Rect> > mMapTilePositions;
 	vector< vector<bool> >* m_collisionMap;
+	vector< vector<bool> >* mLightPassageMap;
 	vector< vector<bool> > m_VisionMap;
 
 	void CalcDamage(int);

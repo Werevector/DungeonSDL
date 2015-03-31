@@ -52,6 +52,10 @@ void Character::SetCollisionMap(vector< vector<bool> >* collMap){
 	m_collisionMap = collMap;
 }
 
+void Character::setLightPassableMap(vector< vector<bool> >* lightMap){
+	mLightPassageMap = lightMap;
+}
+
 void Character::CalcVision(){
 
 	vector<SDL_Point> VisionPoints;
@@ -66,9 +70,9 @@ void Character::CalcVision(){
 			//Get line points from Bresenham
 			VisionPoints = Utils::Bresenham(x,y,mMapX,mMapY);
 			
-			//Check if wall(impassable) is in the way 
+			//Check if wall(Light cannot pass) is in the way 
 			for (int i = 0; i < VisionPoints.size(); i++){
-				if ((*m_collisionMap)[VisionPoints[i].x][VisionPoints[i].y]){
+				if ((*mLightPassageMap)[VisionPoints[i].x][VisionPoints[i].y]){
 					hasVision = false;
 				}
 			}

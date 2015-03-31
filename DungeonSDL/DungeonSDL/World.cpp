@@ -19,6 +19,7 @@ void World::SetDungeonMap(TileMap* map){
 
 	mDungeonMap = map;
 	mCharacters[0]->SetCollisionMap(mDungeonMap->getCollisionMapP());
+	mCharacters[0]->setLightPassableMap(mDungeonMap->getLightPassageMapP());
 }
 
 bool World::LoadDungeon(string dungeonPath){
@@ -52,6 +53,7 @@ bool World::LoadDungeon(string dungeonPath){
 void World::AddWorldCharacter(CharacterPlayable* character)
 {
 	character->SetCollisionMap(mDungeonMap->getCollisionMapP());
+	character->setLightPassableMap(mDungeonMap->getLightPassageMapP());
 	mCharacters.push_back(character);
 }
 
