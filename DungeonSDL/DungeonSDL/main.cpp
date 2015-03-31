@@ -31,6 +31,7 @@ SDL_Event gEvent;
 
 float keyTime = 0;
 const float keyDelay = 0.12;
+bool keyPressed = false;
 
 
 bool initSDL()
@@ -72,11 +73,13 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 }
-int sum = 0;
+
 void Update(const Uint8* keystate, SDL_Event gEvent)
 {
 	
 	actMessage actorMessage;
+
+	keyPressed = false;
 
 	if(keystate[SDL_SCANCODE_UP])
 	{
@@ -84,7 +87,7 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 		{
 			actorMessage.type = messageType::MOVE_UPP;
 			gWorld->DelegateMSG(actorMessage);
-			keyTime = keyDelay;
+			keyPressed = true;
 		}
 	}
 	
@@ -94,7 +97,7 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 		{
 			actorMessage.type = messageType::MOVE_DOWN;
 			gWorld->DelegateMSG(actorMessage);
-			keyTime = keyDelay;
+			keyPressed = true;
 		}
 	}
 	
@@ -103,7 +106,7 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 		if (!(keyTime > 0)){
 			actorMessage.type = messageType::MOVE_LEFT;
 			gWorld->DelegateMSG(actorMessage);
-			keyTime = keyDelay;
+			keyPressed = true;
 		}
 	}
 
@@ -113,17 +116,20 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 		{
 			actorMessage.type = messageType::MOVE_RIGHT;
 			gWorld->DelegateMSG(actorMessage);
-			keyTime = keyDelay;
+			keyPressed = true;
 		}
+	}
+
+	if (keyPressed){
+		keyTime = keyDelay;
 	}
 
 	if (keyTime > 0){
 		keyTime -= gTimer.DeltaTime();
-		sum++;
+		
 	}
 	else if (keyTime < 0){
 		keyTime = 0;
-		sum = 0;
 	}
 
 	gWorld->Update();
@@ -152,24 +158,6 @@ int main( int argc, char* args[] )
 
 		gWorld->LoadDungeon("dummy");
 
-		/*CharacterPlayable* hero;
-		hero = new CharacterPlayable();
-		hero->SetMapTilePositions(tileMap->GetMapTilePositions());
-		hero->SetMapPosition(8, 2);
-		gWorld->AddWorldCharacter(hero);
-
-		CharacterNonPlayable* enemy;
-		enemy = new CharacterNonPlayable();
-		enemy->SetMapTilePositions(tileMap->GetMapTilePositions());
-		enemy->SetMapPosition(2, 6);
-		gWorld->AddWorldNPCharacter(enemy);
-
-		CharacterNonPlayable* enemy2;
-		enemy2 = new CharacterNonPlayable();
-		enemy2->SetMapTilePositions(tileMap->GetMapTilePositions());
-		enemy2->SetMapPosition(3, 7);
-		gWorld->AddWorldNPCharacter(enemy2);*/
-
 		/***************************
 		****************************/
 
@@ -186,11 +174,6 @@ int main( int argc, char* args[] )
 
 
 			const Uint8* keystate = SDL_GetKeyboardState(NULL);
-
-			/*if (SDL_QuitRequested()){
-				quit = true;
-				continue;
-			}*/
 
 			gTimer.Tick();
 

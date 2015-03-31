@@ -208,7 +208,7 @@ void TileMap::addNPC(CharacterNonPlayable* newNPC){
 	NPCList.push_back(newNPC);
 }
 
-void TileMap::Render()
+void TileMap::Render(vector< vector<bool> >* playerVision)
 {
 	
 	for( int i = 0; i < TOTAL_TILES; ++i )
@@ -217,23 +217,21 @@ void TileMap::Render()
 		//Texture rendTex = &mTileTextureClips[mTileSet[i].getType()];
 
 		SDL_Rect t = mTileSet[i].getBox();
-		
-		//Coloring un-passable terrain
 
-		/*if (mTileSet[i].getType() == TILE_WATER || mTileSet[i].getType() >= TILE_STATUE){
+		int x = (i) % LEVEL_TILE_HEIGHT;
+		int y = floor(i / LEVEL_TILE_HEIGHT);
+
+		if ( (*playerVision)[x][y]){
 			
-			mTileTextureAtlas->setColor(255, 50, 50);
+			
+			mTileTextureAtlas->setColor(200, 200, 200);
 		}
 		else{
-			
-			mTileTextureAtlas->setColor(255, 255, 255);
-		}*/
+			mTileTextureAtlas->setColor(100, 100, 100);
+		}
 		
 		mTileTextureAtlas->renderBox( &t, &mTileTextureClips[ mTileSet[i].getType() ] );
 		
 	}
-
-	//SDL_Rect backgroundRect = { 0, 0, mTileTextureAtlas->getWidth(), mTileTextureAtlas->getHeight() };
-	//mTileTextureAtlas->renderBox( &backgroundRect, NULL );
 
 }

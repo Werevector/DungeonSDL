@@ -121,13 +121,22 @@ void World::Update()
 
 void World::Render()
 {
-	mDungeonMap->Render();
+
+	vector< vector<bool> >* playerVision = mCharacters[0]->getVisionMapP();
+	mDungeonMap->Render(playerVision);
 
 	for(int i = 0; i < mCharacters.size(); i++)
 		mCharacters[i]->Render();
 
-	for (int i = 0; i < mNonPlayableCharacters->size(); i++)
-		(*mNonPlayableCharacters)[i]->Render();
+	for (int i = 0; i < mNonPlayableCharacters->size(); i++){
+		
+		bool isVisible = (*playerVision)[(*mNonPlayableCharacters)[i]->getmMapX()][(*mNonPlayableCharacters)[i]->getmMapY()];
+		
+		if (isVisible)
+		{
+			(*mNonPlayableCharacters)[i]->Render();
+		}
+	}
 }
 
 //Character* World::getCharP(){

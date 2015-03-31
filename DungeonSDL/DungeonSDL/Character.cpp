@@ -14,6 +14,8 @@ Character::Character(void)
 	health = 5;
 	IS_DEAD = false;
 
+	m_VisionMap = vector<std::vector<bool>>(TileMap::LEVEL_TILE_WIDTH, std::vector<bool>(TileMap::LEVEL_TILE_HEIGHT));
+
 	/*mPosX = 0;
 	mPosY= 0;*/
 
@@ -47,16 +49,40 @@ void Character::SetMapTilePositions(vector< vector<SDL_Rect> > tilePositions)
 
 
 void Character::SetCollisionMap(vector< vector<bool> >* collMap){
-	c_collisionMap = collMap;
+	m_collisionMap = collMap;
 }
 
+void Character::CalcVision(){
 
-//void Character::Render()
-//{
-//	SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0x00, 0x00, 0xFF );		
-//	SDL_RenderFillRect( Graphics::gRenderer, &mCharacter );
-//}
+	vector<SDL_Point> VisionPoints;
+	bool hasVision;
 
+	for (int x = 0; x < m_collisionMap->size(); x++){
+		for (int y = 0; y < m_collisionMap->size(); y++){
+
+			//Assume that tile is visible
+			hasVision = true;
+
+			//Get line points from Bresenham
+			VisionPoints = Utils::Bresenham(x,y,mMapX,mMapY);
+			
+			//Check if wall(impassable) is in the way 
+			for (int i = 0; i < VisionPoints.size(); i++){
+				if ((*m_collisionMap)[VisionPoints[i].x][VisionPoints[i].y]){
+					hasVision = false;
+				}
+			}
+
+			m_VisionMap[x][y] = hasVision;
+
+		}
+	}
+
+}
+
+vector< vector<bool> >* Character::getVisionMapP(){
+	return &m_VisionMap;
+}
 
 int Character::getmMapX(){
 	return mMapX;

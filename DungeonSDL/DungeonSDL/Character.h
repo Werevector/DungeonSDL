@@ -33,7 +33,7 @@ public:
 	void FlipY();
 
 	bool IsDead();
-
+	vector< vector<bool> >* getVisionMapP();
 	vector <actMessage> message_Queue;
 
 protected:
@@ -54,8 +54,10 @@ protected:
 	SDL_Rect mCurrentTile;
 
 	vector< vector<SDL_Rect> > mMapTilePositions;
-	vector< vector<bool> >* c_collisionMap;
+	vector< vector<bool> >* m_collisionMap;
+	vector< vector<bool> > m_VisionMap;
 
 	void CalcDamage(int);
+	void CalcVision();
 
 };

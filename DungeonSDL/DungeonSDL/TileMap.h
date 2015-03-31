@@ -49,7 +49,7 @@ public:
 
 	vector< vector<bool> >* getCollisionMapP();
 
-	void Render();
+	void Render(vector< vector<bool> >*);
 
 	//Links
 	int up;

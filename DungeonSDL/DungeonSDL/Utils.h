@@ -15,6 +15,8 @@ public:
 
 	static bool CoordsOutOfBounds(int,int);
 
+	static vector<SDL_Point> Bresenham(int, int, int const, int const);
+	
 
 };
 

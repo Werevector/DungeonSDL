@@ -45,7 +45,7 @@ bool DungeonStructure::LoadStructure(string loadPath, Textures gTileTextures)
 	CharacterNonPlayable* enemy;
 	enemy = new CharacterNonPlayable();
 	enemy->SetMapTilePositions(nextMap->GetMapTilePositions());
-	enemy->SetMapPosition(4, 4);
+	enemy->SetMapPosition(5, 6);
 	nextMap->addNPC(enemy);
 
 	mapStructure.emplace(1, nextMap);
