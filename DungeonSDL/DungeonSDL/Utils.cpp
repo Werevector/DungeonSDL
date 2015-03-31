@@ -26,11 +26,18 @@ string Utils::GetApplicationPath()
 
 bool Utils::CoordsOutOfBounds(int x, int y){
 
-	if (x < 0 || x > TileMap::LEVEL_TILE_WIDTH-1 || y < 0 || y > TileMap::LEVEL_TILE_HEIGHT-1){
+	/*if (x < 0 || x > TileMap::LEVEL_TILE_WIDTH-1 || y < 0 || y > TileMap::LEVEL_TILE_HEIGHT-1){
 		return true;
 	}
 	else{
 		return false;
+	}*/
+
+	if (x < 0 || x > 8 || y < 0 || y > 8){
+	return true;
+	}
+	else{
+	return false;
 	}
 
 }

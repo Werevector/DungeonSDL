@@ -206,12 +206,13 @@ vector< vector<bool> >* TileMap::getLightPassageMapP(){
 	return &mLightPassageMap;
 }
 
-vector<CharacterNonPlayable*>* TileMap::getNPCListP(){
+vector<Character*>* TileMap::getNPCListP(){
 	return &NPCList;
 }
 
-void TileMap::addNPC(CharacterNonPlayable* newNPC){
-	//newNPC->setLightPassableMap(&mLightPassageMap);
+void TileMap::addNPC(Character* newNPC){
+	newNPC->SetCollisionMap(&collisionMap);
+	newNPC->setLightPassableMap(&mLightPassageMap);
 	NPCList.push_back(newNPC);
 }
 
@@ -228,6 +229,7 @@ void TileMap::Render(vector< vector<bool> >* playerVision)
 		int x = (i) % LEVEL_TILE_HEIGHT;
 		int y = floor(i / LEVEL_TILE_HEIGHT);
 
+		//adding playervision "shadow"
 		if ( (*playerVision)[x][y]){	
 			
 			mTileTextureAtlas->setColor(200, 200, 200);
@@ -238,10 +240,10 @@ void TileMap::Render(vector< vector<bool> >* playerVision)
 
 		//Color NPC vision
 		
-		/*for (int i = 0; i < NPCList.size(); i++){
+		for (int i = 0; i < NPCList.size(); i++){
 			if ( (*NPCList[i]->getVisionMapP())[x][y] )
 				mTileTextureAtlas->setColor(100, 0, 0);
-		}*/
+		}
 		
 		mTileTextureAtlas->renderBox( &t, &mTileTextureClips[ mTileSet[i].getType() ] );
 		

@@ -6,8 +6,12 @@
 #include "Tile.h"
 #include "Texture.h"
 
-class CharacterNonPlayable;
+class Character;
+#include "Character.h"
+
+//class CharacterNonPlayable;
 //#include "CharacterNonPlayable.h"
+
 
 using namespace std;
 
@@ -59,8 +63,8 @@ public:
 	int left;
 	int right;
 
-	vector<CharacterNonPlayable*>* getNPCListP();
-	void addNPC(CharacterNonPlayable*);
+	vector<Character*>* getNPCListP();
+	void addNPC(Character*);
 
 private:
 	SDL_Rect mTileTextureClips[ TOTAL_TILE_SPRITES ];
@@ -72,7 +76,7 @@ private:
 	vector< vector<bool> > collisionMap;
 	vector< vector<bool> > mLightPassageMap;
 	
-	vector<CharacterNonPlayable*> NPCList;
+	vector<Character*> NPCList;
 
 };
 

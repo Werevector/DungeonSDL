@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
+#include "SDL.h"
 #include <windows.h>
-#include "TileMap.h"
-
+//#include "TileMap.h"
+#include <vector>
 using namespace std;
 
 class Utils

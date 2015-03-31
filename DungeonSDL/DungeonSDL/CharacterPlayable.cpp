@@ -19,7 +19,7 @@ void CharacterPlayable::Render()
 }
 
 
-void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
+void CharacterPlayable::Update(vector<Character*>& npcSet)
 {
 
 
@@ -129,7 +129,7 @@ void CharacterPlayable::Update(vector<CharacterNonPlayable*>& npcSet)
 
 
 
-bool CharacterPlayable::EnemyPresent(int x, int y, vector<CharacterNonPlayable*> npcSet){
+bool CharacterPlayable::EnemyPresent(int x, int y, vector<Character*> npcSet){
 	
 	for (auto npc = npcSet.begin(); npc != npcSet.end(); ++npc){
 		

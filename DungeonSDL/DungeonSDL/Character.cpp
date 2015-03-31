@@ -14,7 +14,7 @@ Character::Character(void)
 	health = 5;
 	IS_DEAD = false;
 
-	m_VisionMap = vector<std::vector<bool>>(TileMap::LEVEL_TILE_WIDTH, std::vector<bool>(TileMap::LEVEL_TILE_HEIGHT));
+	m_VisionMap = vector<std::vector<bool>>(9, std::vector<bool>(9));
 
 	/*mPosX = 0;
 	mPosY= 0;*/
@@ -97,11 +97,11 @@ int Character::getmMapY(){
 }
 
 void Character::FlipX(){
-	mMapX = abs( mMapX - TileMap::LEVEL_TILE_WIDTH + 1 );
+	mMapX = abs( mMapX - 9 + 1 );
 }
 
 void Character::FlipY(){
-	mMapY = abs( mMapY - TileMap::LEVEL_TILE_HEIGHT + 1 );
+	mMapY = abs( mMapY - 9 + 1 );
 }
 
 void Character::CalcDamage(int damage){

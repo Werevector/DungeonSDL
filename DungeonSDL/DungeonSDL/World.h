@@ -1,12 +1,21 @@
 #pragma once
-#include "TileMap.h"
+
+#include "Character.h"
+
+//class CharacterPlayable;
 #include "CharacterPlayable.h"
+
+//class CharacterNonPlayable;
 #include "CharacterNonPlayable.h"
+
+#include "TileMap.h"
 #include <vector>
 #include "ActMessage.h"
 #include "DungeonStructure.h"
 #include "Textures.h"
 #include "GameState.h"
+
+
 
 class World
 {
@@ -17,8 +26,8 @@ public:
 
 	bool LoadDungeon(string);
 	
-	void AddWorldCharacter(CharacterPlayable* character);
-	void AddWorldNPCharacter(CharacterNonPlayable* character);
+	void AddWorldCharacter(Character* character);
+	void AddWorldNPCharacter(Character* character);
 	
 	//Character* getCharP();
 	
@@ -38,7 +47,7 @@ private:
 
 	Textures gTileTextures;
 
-	vector<CharacterPlayable*> mCharacters;
-	vector<CharacterNonPlayable*>* mNonPlayableCharacters;
+	vector<Character*> mCharacters;
+	vector<Character*>* mNonPlayableCharacters;
 };
 

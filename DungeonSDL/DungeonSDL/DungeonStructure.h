@@ -1,10 +1,11 @@
 #pragma once
-class CharacterNonPlayable;
 #include <vector>
 #include <map>
 #include <string>
 #include "TileMap.h"
 #include "Textures.h"
+
+class CharacterNonPlayable;
 #include "CharacterNonPlayable.h"
 
 using namespace std;

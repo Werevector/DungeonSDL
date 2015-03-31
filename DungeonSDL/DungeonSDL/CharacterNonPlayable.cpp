@@ -29,7 +29,7 @@ void CharacterNonPlayable::Render()
 }
 
 
-void CharacterNonPlayable::Update(vector<CharacterPlayable*>& playerSet)
+void CharacterNonPlayable::Update(vector<Character*>& playerSet)
 {
 	
 	for (vector<actMessage>::iterator message = message_Queue.begin(); message != message_Queue.end(); ++message){
@@ -46,12 +46,12 @@ void CharacterNonPlayable::Update(vector<CharacterPlayable*>& playerSet)
 	}
 
 	message_Queue.clear();
-	//CalcVision();
+	CalcVision();
 
 }
 
 
-void CharacterNonPlayable::ReactToPlayerAction(vector<CharacterPlayable*> playerChars)
+void CharacterNonPlayable::ReactToPlayerAction(vector<Character*> playerChars)
 {
 	int deltaX = 0;
 	int deltaY = 0;

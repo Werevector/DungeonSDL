@@ -1,9 +1,6 @@
 #pragma once
 
-class CharacterNonPlayable;
-
 #include "Character.h"
-#include "CharacterNonPlayable.h"
 #include "GameState.h"
 
 class CharacterPlayable :
@@ -14,14 +11,14 @@ public:
 	~CharacterPlayable();
 
 	void Render();
-	void Update(vector<CharacterNonPlayable*>&);
+	void Update(vector<Character*>&);
 
 	/*void AddActMessage(actMessage);*/
 
 protected:
 
-	CharacterNonPlayable* mTargetNPC;
+	Character* mTargetNPC;
 
-	bool EnemyPresent(int, int, vector<CharacterNonPlayable*>);
+	bool EnemyPresent(int, int, vector<Character*>);
 
 };

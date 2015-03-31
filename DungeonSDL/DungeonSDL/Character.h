@@ -7,22 +7,20 @@
 #include <iostream>
 #include "Utils.h"
 #include <cmath>
+//#include "TileMap.h"
 
 using namespace std;
-class CharacterNonPlayable;
 
 class Character
 {
 public:
+	
 	Character(void);
 	~Character(void);
 
 	void SetMapPosition(int x, int y);
 	void SetMapTilePositions(vector< vector<SDL_Rect> > tilePositions);
 	void SetCollisionMap(vector< vector<bool> >*);
-
-	//virtual void Update(vector<CharacterNonPlayable*>&) = 0;
-	//virtual void Render() = 0;
 
 	int getmMapX();
 	int getmMapY();
@@ -31,6 +29,9 @@ public:
 
 	void FlipX();
 	void FlipY();
+
+	virtual void Render() = 0;
+	virtual void Update(vector<Character*>&) = 0;
 
 	bool IsDead();
 	vector< vector<bool> >* getVisionMapP();

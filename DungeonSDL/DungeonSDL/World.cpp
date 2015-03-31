@@ -5,7 +5,7 @@ World::World(void)
 {
 
 	gTileTextures.LoadTextures();
-	mNonPlayableCharacters = new vector < CharacterNonPlayable* > ;
+	mNonPlayableCharacters = new vector < Character* > ;
 
 }
 
@@ -50,7 +50,7 @@ bool World::LoadDungeon(string dungeonPath){
 }
 
 
-void World::AddWorldCharacter(CharacterPlayable* character)
+void World::AddWorldCharacter(Character* character)
 {
 	character->SetCollisionMap(mDungeonMap->getCollisionMapP());
 	character->setLightPassableMap(mDungeonMap->getLightPassageMapP());
@@ -58,7 +58,7 @@ void World::AddWorldCharacter(CharacterPlayable* character)
 }
 
 
-void World::AddWorldNPCharacter(CharacterNonPlayable* character)
+void World::AddWorldNPCharacter(Character* character)
 {
 	mNonPlayableCharacters->push_back(character);
 }
@@ -66,7 +66,7 @@ void World::AddWorldNPCharacter(CharacterNonPlayable* character)
 
 void World::Update()
 {
-	for (vector<CharacterPlayable*>::iterator character = mCharacters.begin(); character != mCharacters.end(); ++character){
+	for (auto character = mCharacters.begin(); character != mCharacters.end(); ++character){
 		(*character)->Update(*mNonPlayableCharacters);
 	}
 

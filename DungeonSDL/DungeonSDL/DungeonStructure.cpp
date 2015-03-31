@@ -28,7 +28,7 @@ bool DungeonStructure::LoadStructure(string loadPath, Textures gTileTextures)
 	tileMap->right = 1;
 
 	tileMap->LoadAndBuildTileMap(Utils::GetApplicationPath() + "\\start.map");
-	CharacterNonPlayable* enemy3;
+	Character* enemy3;
 	enemy3 = new CharacterNonPlayable();
 	enemy3->SetMapTilePositions(tileMap->GetMapTilePositions());
 	enemy3->SetMapPosition(3, 3);
@@ -42,7 +42,7 @@ bool DungeonStructure::LoadStructure(string loadPath, Textures gTileTextures)
 	nextMap->SetTileTexture(*gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32));
 	nextMap->LoadAndBuildTileMap(Utils::GetApplicationPath() + "\\right.map");
 
-	CharacterNonPlayable* enemy;
+	Character* enemy;
 	enemy = new CharacterNonPlayable();
 	enemy->SetMapTilePositions(nextMap->GetMapTilePositions());
 	enemy->SetMapPosition(5, 6);
@@ -56,10 +56,10 @@ bool DungeonStructure::LoadStructure(string loadPath, Textures gTileTextures)
 	nextMap2->SetTileTexture(*gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32));
 	nextMap2->LoadAndBuildTileMap(Utils::GetApplicationPath() + "\\right2.map");
 
-	CharacterNonPlayable* enemy2;
+	Character* enemy2;
 	enemy2 = new CharacterNonPlayable();
 	enemy2->SetMapTilePositions(nextMap2->GetMapTilePositions());
-	enemy2->SetMapPosition(6, 4);
+	enemy2->SetMapPosition(6, 6);
 	nextMap2->addNPC(enemy2);
 
 	mapStructure.emplace(2, nextMap2);
