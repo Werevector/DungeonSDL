@@ -18,6 +18,8 @@ public:
 
 	static vector<SDL_Point> Bresenham(int, int, int const, int const);
 	
+	static vector<SDL_Point*> A_Star_PathCalc(int, int, int, int, vector< vector<bool> >);
+
 
 };
 

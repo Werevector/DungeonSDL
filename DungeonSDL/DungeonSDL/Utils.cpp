@@ -116,3 +116,8 @@ vector<SDL_Point> Utils::Bresenham(int x1, int y1, int const x2, int const y2)
 	return resultVector;
 
 }
+
+vector<SDL_Point*> Utils::A_Star_PathCalc(int originX, int originY, int TargetX, int TargetY, vector<vector<bool>> map){
+	
+}
+

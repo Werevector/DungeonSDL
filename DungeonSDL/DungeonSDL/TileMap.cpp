@@ -242,7 +242,7 @@ void TileMap::Render(vector< vector<bool> >* playerVision)
 		
 		for (int i = 0; i < NPCList.size(); i++){
 			if ( (*NPCList[i]->getVisionMapP())[x][y] )
-				mTileTextureAtlas->setColor(100, 0, 0);
+				mTileTextureAtlas->setColor(200, 100, 100);
 		}
 		
 		mTileTextureAtlas->renderBox( &t, &mTileTextureClips[ mTileSet[i].getType() ] );
