@@ -4,14 +4,7 @@
 DungeonStructure::DungeonStructure()
 {
 
-	/*TileMap* tileMap;
-	tileMap = new TileMap();
-	tileMap->SetTileTexture(*gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32));
-	tileMap->LoadAndBuildTileMap(Utils::GetApplicationPath());
-	gWorld->SetDungeonMap(tileMap);*/
-
 	int currentKey = 0;
-
 
 }
 
@@ -21,50 +14,34 @@ bool DungeonStructure::LoadStructure(string loadPath, Textures gTileTextures)
 	/*********************
 	dummy stage
 	*********************/
-	TileMap* tileMap;
-	tileMap = new TileMap();
-	tileMap->SetTileTexture(*gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32));
 
-	tileMap->right = 1;
-
-	tileMap->LoadAndBuildTileMap(Utils::GetApplicationPath() + "\\start.map");
-	Character* enemy3;
-	enemy3 = new CharacterNonPlayable();
-	enemy3->SetMapTilePositions(tileMap->GetMapTilePositions());
-	enemy3->SetMapPosition(3, 3);
-	tileMap->addNPC(enemy3);
-	mapStructure.emplace(0,tileMap);
-
-	TileMap* nextMap;
-	nextMap = new TileMap();
-	nextMap->left = 0;
-	nextMap->right = 2;
-	nextMap->SetTileTexture(*gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32));
-	nextMap->LoadAndBuildTileMap(Utils::GetApplicationPath() + "\\right.map");
-
-	Character* enemy;
-	enemy = new CharacterNonPlayable();
-	enemy->SetMapTilePositions(nextMap->GetMapTilePositions());
-	enemy->SetMapPosition(5, 6);
-	nextMap->addNPC(enemy);
-
-	mapStructure.emplace(1, nextMap);
-
-	TileMap* nextMap2;
-	nextMap2 = new TileMap();
-	nextMap2->left = 1;
-	nextMap2->SetTileTexture(*gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32));
-	nextMap2->LoadAndBuildTileMap(Utils::GetApplicationPath() + "\\right2.map");
-
-	Character* enemy2;
-	enemy2 = new CharacterNonPlayable();
-	enemy2->SetMapTilePositions(nextMap2->GetMapTilePositions());
-	enemy2->SetMapPosition(6, 6);
-	nextMap2->addNPC(enemy2);
-
-	mapStructure.emplace(2, nextMap2);
-
+	DungeonRoom* newRoom;
+	newRoom = new DungeonRoom();
+	newRoom->BuildRoom(Utils::GetApplicationPath() + "\\start.map");
+	Character* NPC = new CharacterNonPlayable();
+	newRoom->AddNPC(NPC, 2, 5);
+	newRoom->AddGate(8,2,1);
+	newRoom->right = 1;
+	mRoomStructure.emplace(0, newRoom);
 	
+	DungeonRoom* newRoom2;
+	newRoom2 = new DungeonRoom();
+	newRoom2->BuildRoom(Utils::GetApplicationPath() + "\\right.map");
+	Character* NPC2 = new CharacterNonPlayable();
+	newRoom2->AddNPC(NPC2, 5, 5);
+	newRoom2->AddGate(8, 2, 1);
+	newRoom2->left = 0;
+	newRoom2->right = 2;
+	mRoomStructure.emplace(1, newRoom2);
+
+	DungeonRoom* newRoom3;
+	newRoom3 = new DungeonRoom();
+	newRoom3->BuildRoom(Utils::GetApplicationPath() + "\\right2.map");
+	Character* NPC3 = new CharacterNonPlayable();
+	newRoom3->AddNPC(NPC3, 3, 6);
+	newRoom3->AddGate(8, 2, 1);
+	newRoom3->left = 1;
+	mRoomStructure.emplace(2, newRoom3);
 
 
 
@@ -75,10 +52,10 @@ bool DungeonStructure::LoadStructure(string loadPath, Textures gTileTextures)
 	return true;
 }
 
-TileMap* DungeonStructure::getMap(int key){
-	return mapStructure.find(key)->second;
+DungeonRoom* DungeonStructure::getMap(int key){
+	return mRoomStructure.find(key)->second;
 }
 
-TileMap* DungeonStructure::getStart(){
-	return mapStructure.find(0)->second;
+DungeonRoom* DungeonStructure::getStart(){
+	return mRoomStructure.find(0)->second;
 }

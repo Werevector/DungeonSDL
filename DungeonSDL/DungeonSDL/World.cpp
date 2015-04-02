@@ -1,7 +1,7 @@
 #include "World.h"
 
 
-World::World(void)
+World::World()
 {
 
 	gTileTextures.LoadTextures();
@@ -15,35 +15,25 @@ World::~World(void)
 }
 
 
-void World::SetDungeonMap(TileMap* map){
+void World::SetDungeonRoom(DungeonRoom* room){
 
-	mDungeonMap = map;
-	mCharacters[0]->SetCollisionMap(mDungeonMap->getCollisionMapP());
-	mCharacters[0]->setLightPassableMap(mDungeonMap->getLightPassageMapP());
+	mCurrentRoom = room;
+	mCharacters[0]->SetCollisionMap(mCurrentRoom->getCollisionMapP());
+	mCharacters[0]->setLightPassableMap(mCurrentRoom->getLightPassageMapP());
 }
 
 bool World::LoadDungeon(string dungeonPath){
+	
 	mDungeon.LoadStructure(dungeonPath, gTileTextures);
-	mDungeonMap = mDungeon.getStart();
-	mNonPlayableCharacters = mDungeonMap->getNPCListP();
+
+	mCurrentRoom = mDungeon.getStart();
+	mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 
 	CharacterPlayable* hero;
 	hero = new CharacterPlayable();
-	hero->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
+	hero->SetMapTilePositions(mCurrentRoom->getRoomTileRects());
 	hero->SetMapPosition(8, 2);
 	AddWorldCharacter(hero);
-
-	/*CharacterNonPlayable* enemy;
-	enemy = new CharacterNonPlayable();
-	enemy->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
-	enemy->SetMapPosition(2, 6);
-	AddWorldNPCharacter(enemy);
-
-	CharacterNonPlayable* enemy2;
-	enemy2 = new CharacterNonPlayable();
-	enemy2->SetMapTilePositions(mDungeonMap->GetMapTilePositions());
-	enemy2->SetMapPosition(3, 7);
-	AddWorldNPCharacter(enemy2);*/
 
 	return true;
 
@@ -52,8 +42,8 @@ bool World::LoadDungeon(string dungeonPath){
 
 void World::AddWorldCharacter(Character* character)
 {
-	character->SetCollisionMap(mDungeonMap->getCollisionMapP());
-	character->setLightPassableMap(mDungeonMap->getLightPassageMapP());
+	character->SetCollisionMap(mCurrentRoom->getCollisionMapP());
+	character->setLightPassableMap(mCurrentRoom->getLightPassageMapP());
 	mCharacters.push_back(character);
 }
 
@@ -87,27 +77,27 @@ void World::Update()
 		switch (lDir){
 
 		case UP:
-			SetDungeonMap(mDungeon.getMap(mDungeonMap->up));
+			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->up));
 			mCharacters[0]->FlipY();
-			mNonPlayableCharacters = mDungeonMap->getNPCListP();
+			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;
 			break;
 		case DOWN:
-			SetDungeonMap(mDungeon.getMap(mDungeonMap->down));
+			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->down));
 			mCharacters[0]->FlipY();
-			mNonPlayableCharacters = mDungeonMap->getNPCListP();
+			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;
 			break;
 		case LEFT:
-			SetDungeonMap(mDungeon.getMap(mDungeonMap->left));
+			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->left));
 			mCharacters[0]->FlipX();
-			mNonPlayableCharacters = mDungeonMap->getNPCListP();
+			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;
 			break;
 		case RIGHT:
-			SetDungeonMap(mDungeon.getMap(mDungeonMap->right));
+			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->right));
 			mCharacters[0]->FlipX();
-			mNonPlayableCharacters = mDungeonMap->getNPCListP();
+			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;
 			break;
 		default:
@@ -125,7 +115,7 @@ void World::Render()
 {
 
 	vector< vector<bool> >* playerVision = mCharacters[0]->getVisionMapP();
-	mDungeonMap->Render(playerVision);
+	mCurrentRoom->Render(playerVision);
 
 	for(int i = 0; i < mCharacters.size(); i++)
 		mCharacters[i]->Render();

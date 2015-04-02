@@ -53,7 +53,7 @@ bool initSDL()
 bool loadMedia()
 {
 	bool success = gTileTextures.LoadTextures();
-	return success;
+	return true;
 
 }
 
@@ -69,6 +69,7 @@ void close()
 	SDL_DestroyWindow( Graphics::gWindow );
 	Graphics::gWindow = NULL;
 	Graphics::gRenderer = NULL;
+
 
 	IMG_Quit();
 	SDL_Quit();

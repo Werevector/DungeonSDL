@@ -8,19 +8,20 @@
 //class CharacterNonPlayable;
 #include "CharacterNonPlayable.h"
 
-#include "TileMap.h"
+//#include "TileMap.h"
 #include <vector>
 #include "ActMessage.h"
 #include "DungeonStructure.h"
 #include "Textures.h"
 #include "GameState.h"
+#include "DungeonRoom.h"
 
 
 
 class World
 {
 public:
-	World(void);
+	World();
 	~World(void);
 
 
@@ -41,9 +42,9 @@ public:
 
 private:
 	
-	void SetDungeonMap(TileMap* map);
+	void SetDungeonRoom(DungeonRoom* room);
 	DungeonStructure mDungeon;
-	TileMap *mDungeonMap;
+	DungeonRoom* mCurrentRoom;
 
 	Textures gTileTextures;
 

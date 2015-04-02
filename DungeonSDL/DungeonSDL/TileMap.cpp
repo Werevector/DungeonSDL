@@ -11,14 +11,12 @@ TileMap::TileMap(void)
 	{
 		mTilePostions.push_back(tempRectangles);
 	}
-
-	collisionMap = vector<std::vector<bool>>(LEVEL_TILE_WIDTH, std::vector<bool>(LEVEL_TILE_HEIGHT));
-	mLightPassageMap = vector<std::vector<bool>>(LEVEL_TILE_WIDTH, std::vector<bool>(LEVEL_TILE_HEIGHT));
 }
 
 
 TileMap::~TileMap(void)
 {
+
 }
 
 
@@ -69,12 +67,13 @@ bool TileMap::LoadAndBuildTileMap(string path)
 				SDL_Rect rect = {x + TILE_WIDTH / 2, y + TILE_HEIGHT / 2, 0, 0};
 				mTilePostions[xCounter][yCounter] = rect;
 				
-				if (tileType == TILE_WATER || tileType >= TILE_STATUE)
+				/*if (tileType == TILE_WATER || tileType >= TILE_STATUE)
 					collisionMap[xCounter][yCounter] = true;
 
 				if ((tileType >= TILE_STATUE))
 					mLightPassageMap[xCounter][yCounter] = true;
-				
+				*/
+
 				//tempRectangles.push_back(rect);
 				if(xCounter < LEVEL_TILE_WIDTH - 1)
 				{
@@ -178,7 +177,8 @@ bool TileMap::LoadAndBuildTileMap(string path)
     //Close the file
     mapStream.close();
 
-	
+	gTileTextures.LoadTextures();
+	SetTileTexture();
 
 
 
@@ -187,33 +187,16 @@ bool TileMap::LoadAndBuildTileMap(string path)
 }
 
 
-void TileMap::SetTileTexture(Texture &tileTextureAtlas)
+void TileMap::SetTileTexture()
 {
-	mTileTextureAtlas = &tileTextureAtlas;
+	//mTileTextureAtlas = &tileTextureAtlas;
+	mTileTextureAtlas = gTileTextures.GetTexture(Textures::DUNGEON_MAP_TEST_32);
 }
 
 
 vector< vector<SDL_Rect> > TileMap::GetMapTilePositions()
 {
 	return mTilePostions;
-}
-
-vector< vector<bool> >* TileMap::getCollisionMapP(){
-	return &collisionMap;
-}
-
-vector< vector<bool> >* TileMap::getLightPassageMapP(){
-	return &mLightPassageMap;
-}
-
-vector<Character*>* TileMap::getNPCListP(){
-	return &NPCList;
-}
-
-void TileMap::addNPC(Character* newNPC){
-	newNPC->SetCollisionMap(&collisionMap);
-	newNPC->setLightPassableMap(&mLightPassageMap);
-	NPCList.push_back(newNPC);
 }
 
 void TileMap::Render(vector< vector<bool> >* playerVision)
@@ -240,13 +223,17 @@ void TileMap::Render(vector< vector<bool> >* playerVision)
 
 		//Color NPC vision
 		
-		for (int i = 0; i < NPCList.size(); i++){
+		/*for (int i = 0; i < NPCList.size(); i++){
 			if ( (*NPCList[i]->getVisionMapP())[x][y] )
 				mTileTextureAtlas->setColor(200, 100, 100);
 		}
-		
+		*/
 		mTileTextureAtlas->renderBox( &t, &mTileTextureClips[ mTileSet[i].getType() ] );
 		
 	}
 
+}
+
+vector<Tile> TileMap::getTileSet(){
+	return mTileSet;
 }

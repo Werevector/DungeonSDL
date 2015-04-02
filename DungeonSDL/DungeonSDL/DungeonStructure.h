@@ -4,6 +4,7 @@
 #include <string>
 #include "TileMap.h"
 #include "Textures.h"
+#include "DungeonRoom.h"
 
 class CharacterNonPlayable;
 #include "CharacterNonPlayable.h"
@@ -19,20 +20,13 @@ public:
 	
 	bool LoadStructure(string, Textures);
 	
-	TileMap* getStart();
-	TileMap* getMap(int);
-
-	//Get map from current position
-	int getRight();
-	int getLeft();
-	int getUp();
-	int getDown();
-	
+	DungeonRoom* getStart();
+	DungeonRoom* getMap(int);
 
 private:
 
 	//Structure map
-	map<int, TileMap*> mapStructure;
+	map<int, DungeonRoom*> mRoomStructure;
 
 	int currentKey;
 
