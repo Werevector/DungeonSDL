@@ -19,3 +19,10 @@ extern loadDirection lDir;
 
 //Flags
 extern bool MAP_SWITCH;
+extern bool FULL_SCREEN;
+
+//Stats
+extern int WINDOW_HEIGHT;
+extern int WINDOW_WIDTH;
+extern int WINDOW_CENTER_OFFSET_X;
+extern int WINDOW_CENTER_OFFSET_Y;

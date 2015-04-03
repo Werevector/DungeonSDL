@@ -45,6 +45,8 @@ void CharacterNonPlayable::Update(vector<Character*>& playerSet)
 		}
 	}
 
+	SetMapPosition(mMapX, mMapY);
+
 	message_Queue.clear();
 	CalcVision();
 

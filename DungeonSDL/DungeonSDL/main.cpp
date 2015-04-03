@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 //#include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include <stdio.h>
 #include <string>
@@ -23,28 +24,44 @@
 using namespace std;
 
 Textures gTileTextures;
+
 Texture gtex;
+
 GameTimer gTimer;
+
 World *gWorld;
+
 SDL_Event gEvent;
-//vector<Tile> *gTileSet;
+
+TTF_Font * gFont = NULL;
+
+SDL_Rect gWindowRect;
+SDL_Rect gGameInfoRect;
 
 float keyTime = 0;
 const float keyDelay = 0.12;
 bool keyPressed = false;
 
 
-bool initSDL()
+bool Init()
 {
 	//Initialization flag
 	bool success = true;
 
 	SDL_Init( SDL_INIT_VIDEO );
-	Graphics::gWindow = SDL_CreateWindow( "DungeonCrawler", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Graphics::SCREEN_WIDTH, Graphics::SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+	Graphics::gWindow = SDL_CreateWindow("DungeonCrawler", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	Graphics::gRenderer = SDL_CreateRenderer( Graphics::gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 	SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "best" );
 
+	TTF_Init();
+
+	SDL_GetWindowSize(Graphics::gWindow, &gWindowRect.w, &gWindowRect.h);
+
+	gGameInfoRect.x = 50;
+	gGameInfoRect.y = gWindowRect.h - 200;
+	gGameInfoRect.w = gWindowRect.w - 100;
+	gGameInfoRect.h = 100;
 	
 
 	return success;
@@ -53,6 +70,16 @@ bool initSDL()
 bool loadMedia()
 {
 	bool success = gTileTextures.LoadTextures();
+	
+	string fontPath = Utils::GetApplicationPath() + "\\infoFont.ttf";
+
+	gFont = TTF_OpenFont( fontPath.c_str(), 28);
+	if (gFont == NULL)
+	{
+		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+		success = false;
+	}
+
 	return true;
 
 }
@@ -64,13 +91,15 @@ void close()
 	gWorld->~World();
 	gTileTextures.~Textures();
 
+	TTF_CloseFont(gFont);
+
 	//Destroy window	
 	SDL_DestroyRenderer( Graphics::gRenderer );
 	SDL_DestroyWindow( Graphics::gWindow );
 	Graphics::gWindow = NULL;
 	Graphics::gRenderer = NULL;
 
-
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -142,7 +171,7 @@ int main( int argc, char* args[] )
 
 	gTimer.Reset();
 
-	if( !initSDL() )
+	if( !Init() )
 	{
 		printf( "Failed to initialize!\n" );
 	}
@@ -170,6 +199,23 @@ int main( int argc, char* args[] )
 				if (gEvent.type == SDL_QUIT){
 					quit = true;
 				}
+
+				if (gEvent.key.keysym.sym == SDLK_ESCAPE){
+					quit = true;
+				}
+
+				if (gEvent.window.event == SDL_WINDOWEVENT_RESIZED){
+					WINDOW_WIDTH = gEvent.window.data1;
+					WINDOW_HEIGHT = gEvent.window.data2;
+
+					SDL_GetWindowSize(Graphics::gWindow, &gWindowRect.w, &gWindowRect.h);
+
+					gGameInfoRect.x = 50;
+					gGameInfoRect.y = gWindowRect.h - 200;
+					gGameInfoRect.w = gWindowRect.w - 100;
+					gGameInfoRect.h = 100;
+
+				}
 			}//EventWhile
 
 
@@ -180,10 +226,15 @@ int main( int argc, char* args[] )
 
 			Update(keystate, gEvent);
 
-			SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+			SDL_SetRenderDrawColor( Graphics::gRenderer, 0x00, 0x00, 0x00, 0xFF );
 			SDL_RenderClear( Graphics::gRenderer );
-				
+			
+			SDL_SetRenderDrawColor(Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+			SDL_RenderDrawRect( Graphics::gRenderer, &gGameInfoRect);
+
 			gWorld->Render();
+
+			Utils::RenderGameInfo(&gGameInfoRect, gFont);
 
 			SDL_RenderPresent( Graphics::gRenderer );
 			

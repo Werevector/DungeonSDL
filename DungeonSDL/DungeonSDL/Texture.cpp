@@ -77,8 +77,8 @@ bool Texture::loadFromFile( std::string path )
 	return mTexture != NULL;
 }
 
-#ifdef _SDL_TTF_H
-bool Texture::loadFromRenderedText( std::string textureText, SDL_Color textColor )
+//#ifdef _SDL_TTF_H
+bool Texture::loadFromRenderedText( std::string textureText, SDL_Color textColor, TTF_Font* gFont)
 {
 	//Get rid of preexisting texture
 	free();
@@ -88,7 +88,7 @@ bool Texture::loadFromRenderedText( std::string textureText, SDL_Color textColor
 	if( textSurface != NULL )
 	{
 		//Create texture from surface pixels
-        mTexture = SDL_CreateTextureFromSurface( gRenderer, textSurface );
+        mTexture = SDL_CreateTextureFromSurface( Graphics::gRenderer, textSurface );
 		if( mTexture == NULL )
 		{
 			printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
@@ -112,7 +112,7 @@ bool Texture::loadFromRenderedText( std::string textureText, SDL_Color textColor
 	//Return success
 	return mTexture != NULL;
 }
-#endif
+//#endif
 
 void Texture::free()
 {

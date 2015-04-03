@@ -7,7 +7,7 @@
 #include "Texture.h"
 #include "Textures.h"
 #include "TileTypeCodes.h"
-
+#include "GameState.h"
 
 class Character;
 #include "Character.h"
@@ -25,6 +25,12 @@ public:
 	//Tile constants 
 	static const int TILE_WIDTH = 32; 
 	static const int TILE_HEIGHT = 32; 
+
+	//static const int TILE_WIDTH = 64;
+	//static const int TILE_HEIGHT = 64;
+
+	/*static const int TILE_WIDTH = 16;
+	static const int TILE_HEIGHT = 16;*/
 
 	static const int TOTAL_TILES = 81; 
 	static const int TOTAL_TILE_SPRITES = 10; 
@@ -44,12 +50,6 @@ public:
 	vector< vector<SDL_Rect> > GetMapTilePositions();
 
 	void Render(vector< vector<bool> >*);
-
-	////Links
-	//int up;
-	//int down;
-	//int left;
-	//int right;
 
 	vector<Character*>* getNPCListP();
 	vector<Tile> getTileSet();

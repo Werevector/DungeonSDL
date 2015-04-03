@@ -117,6 +117,30 @@ vector<SDL_Point> Utils::Bresenham(int x1, int y1, int const x2, int const y2)
 
 }
 
+void Utils::RenderGameInfo(SDL_Rect* renderRect, TTF_Font* font){
+
+	Texture gTextTexture;
+
+	SDL_Color textColor = { 255, 255, 255 };
+	gTextTexture.loadFromRenderedText("Window Width: " + std::to_string(WINDOW_WIDTH), textColor, font);
+	gTextTexture.render(renderRect->x+5, renderRect->y+5);
+
+	//textColor = { 255, 0, 0 };
+	//gTextTexture.loadFromRenderedText(std::to_string(WINDOW_WIDTH), textColor, font);
+	//gTextTexture.render(renderRect->x + 10, renderRect->y);
+
+	//textColor = { 255, 255, 255 };
+	gTextTexture.loadFromRenderedText("Window Height: " + std::to_string(WINDOW_HEIGHT), textColor, font);
+	gTextTexture.render(renderRect->x+5, renderRect->y+35);
+
+	//textColor = { 255, 0, 0 };
+	//gTextTexture.loadFromRenderedText(std::to_string(WINDOW_HEIGHT), textColor, font);
+	//gTextTexture.render(renderRect->x + 10, renderRect->y+20);
+
+	gTextTexture.free();
+
+}
+
 //vector<SDL_Point*> Utils::A_Star_PathCalc(int originX, int originY, int TargetX, int TargetY, vector<vector<bool>> map){
 //	return 
 //}

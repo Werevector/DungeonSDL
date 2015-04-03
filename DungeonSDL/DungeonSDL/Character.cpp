@@ -38,6 +38,9 @@ void Character::SetMapPosition(int x, int y)
 		mCurrentTile = mMapTilePositions[x][y];
 		mCharacter.x = mCurrentTile.x - mCharacter.w / 2;
 		mCharacter.y = mCurrentTile.y - mCharacter.h / 2;
+
+		mCharacter.x += WINDOW_CENTER_OFFSET_X;
+		mCharacter.y += WINDOW_CENTER_OFFSET_Y;
 	}
 }
 

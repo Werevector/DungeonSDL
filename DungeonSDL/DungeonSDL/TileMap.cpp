@@ -180,7 +180,9 @@ bool TileMap::LoadAndBuildTileMap(string path)
 	gTileTextures.LoadTextures();
 	SetTileTexture();
 
-
+	WINDOW_CENTER_OFFSET_X = (WINDOW_WIDTH / 2) - (LEVEL_WIDTH / 2);
+	WINDOW_CENTER_OFFSET_Y = (WINDOW_HEIGHT / 2) - (LEVEL_HEIGHT / 2);
+	
 
     //If the map was loaded fine
     return tilesLoaded;
@@ -207,7 +209,13 @@ void TileMap::Render(vector< vector<bool> >* playerVision)
 
 		//Texture rendTex = &mTileTextureClips[mTileSet[i].getType()];
 
+		WINDOW_CENTER_OFFSET_X = (WINDOW_WIDTH / 2) - (LEVEL_WIDTH / 2);
+		WINDOW_CENTER_OFFSET_Y = (WINDOW_HEIGHT / 2) - (LEVEL_HEIGHT / 2);
+
 		SDL_Rect t = mTileSet[i].getBox();
+
+		t.x += WINDOW_CENTER_OFFSET_X;
+		t.y += WINDOW_CENTER_OFFSET_Y;
 
 		int x = (i) % LEVEL_TILE_HEIGHT;
 		int y = floor(i / LEVEL_TILE_HEIGHT);

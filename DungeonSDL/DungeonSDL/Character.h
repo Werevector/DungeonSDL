@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Utils.h"
 #include <cmath>
+#include"GameState.h"
 //#include "TileMap.h"
 
 using namespace std;

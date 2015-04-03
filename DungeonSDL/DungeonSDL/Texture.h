@@ -1,10 +1,12 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 #include <iostream>
 #include "Graphics.h"
+
 
 
 class Texture
@@ -18,10 +20,10 @@ class Texture
 		//Loads image at specified path
 		bool loadFromFile( std::string path );
 		
-		#ifdef _SDL_TTF_H
+		//#ifdef _SDL_TTF_H
 		//Creates image from font string
-		bool loadFromRenderedText( std::string textureText, SDL_Color textColor );
-		#endif
+		bool loadFromRenderedText( std::string textureText, SDL_Color textColor, TTF_Font* );
+		//#endif
 
 		//Deallocates texture
 		void free();
