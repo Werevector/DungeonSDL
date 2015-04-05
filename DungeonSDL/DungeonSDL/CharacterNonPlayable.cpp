@@ -40,6 +40,7 @@ void CharacterNonPlayable::Update(vector<Character*>& playerSet)
 			damageTaken = true;
 		case REACT_TO_ACTION:
 			ReactToPlayerAction(playerSet);
+			CalcVision();
 		case DEFAULT:
 			break;
 		}
@@ -48,7 +49,7 @@ void CharacterNonPlayable::Update(vector<Character*>& playerSet)
 	SetMapPosition(mMapX, mMapY);
 
 	message_Queue.clear();
-	CalcVision();
+	
 
 }
 

@@ -16,10 +16,12 @@ void DungeonRoom::BuildRoom(string path){
 
 void DungeonRoom::BuildCollisionMap(vector<Tile> tileMap){
 	
+	mCollisionMap = vector<std::vector<bool>>(mTileMap.LEVEL_TILE_WIDTH, std::vector<bool>(mTileMap.LEVEL_TILE_HEIGHT));
+
 	for (int i = 0; i < tileMap.size(); i++){
 		
-		int x = (i) % RoomTileWidth;
-		int y = floor(i / RoomTileWidth );
+		int x = (i) % mTileMap.LEVEL_TILE_WIDTH;
+		int y = floor(i / mTileMap.LEVEL_TILE_HEIGHT);
 	
 		if (tileMap[i].getType() == TILE_WATER || tileMap[i].getType() >= TILE_STATUE)
 			mCollisionMap[x][y] = true;
@@ -28,10 +30,13 @@ void DungeonRoom::BuildCollisionMap(vector<Tile> tileMap){
 }
 
 void DungeonRoom::BuildLightPassageMap(vector<Tile>tileMap){
+	
+	mLightPassageMap = vector<std::vector<bool>>(mTileMap.LEVEL_TILE_WIDTH, std::vector<bool>(mTileMap.LEVEL_TILE_HEIGHT));
+
 	for (int i = 0; i < tileMap.size(); i++){
 
-		int x = (i) % RoomTileWidth;
-		int y = floor(i / RoomTileWidth);
+		int x = (i) % mTileMap.LEVEL_TILE_WIDTH;
+		int y = floor(i / mTileMap.LEVEL_TILE_HEIGHT);
 
 		if ((tileMap[i].getType() >= TILE_STATUE))
 			mLightPassageMap[x][y] = true;

@@ -32,7 +32,7 @@ bool World::LoadDungeon(string dungeonPath){
 	CharacterPlayable* hero;
 	hero = new CharacterPlayable();
 	hero->SetMapTilePositions(mCurrentRoom->getRoomTileRects());
-	hero->SetMapPosition(8, 2);
+	hero->SetMapPosition(3, 2);
 	AddWorldCharacter(hero);
 
 	return true;
@@ -78,24 +78,28 @@ void World::Update()
 
 		case UP:
 			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->up));
+			mCharacters[0]->SetMapTilePositions(mCurrentRoom->getRoomTileRects());
 			mCharacters[0]->FlipY();
 			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;
 			break;
 		case DOWN:
 			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->down));
+			mCharacters[0]->SetMapTilePositions(mCurrentRoom->getRoomTileRects());
 			mCharacters[0]->FlipY();
 			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;
 			break;
 		case LEFT:
 			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->left));
+			mCharacters[0]->SetMapTilePositions(mCurrentRoom->getRoomTileRects());
 			mCharacters[0]->FlipX();
 			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;
 			break;
 		case RIGHT:
 			SetDungeonRoom(mDungeon.getMap(mCurrentRoom->right));
+			mCharacters[0]->SetMapTilePositions(mCurrentRoom->getRoomTileRects());
 			mCharacters[0]->FlipX();
 			mNonPlayableCharacters = mCurrentRoom->getNpcListP();
 			MAP_SWITCH = false;

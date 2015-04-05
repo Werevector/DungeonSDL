@@ -20,5 +20,5 @@ protected:
 	Character* mTargetNPC;
 
 	bool EnemyPresent(int, int, vector<Character*>);
-
+	bool CoordsOutOfBounds(int, int);
 };

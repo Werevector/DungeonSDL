@@ -24,3 +24,4 @@ static const int TILE_WALL_DOWN = 6;
 static const int TILE_WALL_LEFT = 7;
 static const int TILE_WALL_UP = 8;
 static const int TILE_WALL_RIGHT = 9;
+static const int TILE_EMPTY = 99;

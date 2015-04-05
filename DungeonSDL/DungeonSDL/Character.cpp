@@ -57,6 +57,8 @@ void Character::SetCollisionMap(vector< vector<bool> >* collMap){
 
 void Character::setLightPassableMap(vector< vector<bool> >* lightMap){
 	mLightPassageMap = lightMap;
+	m_VisionMap = vector<std::vector<bool>>(lightMap->size(), std::vector<bool>(lightMap->size()));
+	CalcVision();
 }
 
 void Character::CalcVision(){

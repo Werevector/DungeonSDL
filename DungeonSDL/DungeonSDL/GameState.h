@@ -26,3 +26,5 @@ extern int WINDOW_HEIGHT;
 extern int WINDOW_WIDTH;
 extern int WINDOW_CENTER_OFFSET_X;
 extern int WINDOW_CENTER_OFFSET_Y;
+extern double GAME_FPS;
+extern double GAME_FRAME_TIME;

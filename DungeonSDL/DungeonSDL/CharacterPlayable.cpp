@@ -25,6 +25,7 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 
 	actMessage actorMessage;
 	bool attacking = false;
+	bool hasMoved = false;
 
 	for (vector<actMessage>::iterator message = message_Queue.begin(); message != message_Queue.end(); ++message){
 
@@ -34,9 +35,10 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 
 			if (!EnemyPresent(mMapX, (mMapY - 1), npcSet) && !attacking)
 			{
-				if(!Utils::CoordsOutOfBounds(mMapX, mMapY - 1)){
+				if(!CoordsOutOfBounds(mMapX, mMapY - 1)){
 					if (!(*m_collisionMap)[mMapX][mMapY - 1]){
 						mMapY--;
+						hasMoved = true;
 					}
 				}
 				else{
@@ -55,9 +57,10 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 		case MOVE_DOWN:
 			if (!EnemyPresent(mMapX, (mMapY + 1), npcSet) && !attacking)
 			{
-				if (!Utils::CoordsOutOfBounds(mMapX, mMapY + 1)){
+				if (!CoordsOutOfBounds(mMapX, mMapY + 1)){
 					if (!(*m_collisionMap)[mMapX][mMapY + 1]){
 						mMapY++;
+						hasMoved = true;
 					}
 				}else{
 					MAP_SWITCH = true;
@@ -75,9 +78,10 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 		case MOVE_LEFT:
 			if (!EnemyPresent(mMapX - 1, mMapY, npcSet) && !attacking)
 			{
-				if (!Utils::CoordsOutOfBounds(mMapX - 1, mMapY)){
+				if (!CoordsOutOfBounds(mMapX - 1, mMapY)){
 					if (!(*m_collisionMap)[mMapX - 1][mMapY]){
 						mMapX--;
+						hasMoved = true;
 					}
 				}
 				else{
@@ -95,9 +99,10 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 		case MOVE_RIGHT:
 			if (!EnemyPresent(mMapX + 1, mMapY, npcSet) && !attacking)
 			{
-				if (!Utils::CoordsOutOfBounds(mMapX + 1, mMapY)){
+				if (!CoordsOutOfBounds(mMapX + 1, mMapY)){
 					if (!(*m_collisionMap)[mMapX + 1][mMapY]){
 						mMapX++;
+						hasMoved = true;
 					}
 				}
 				else{
@@ -119,10 +124,14 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 
 	}
 	
+	if (hasMoved){
+		CalcVision();
+	}
 	SetMapPosition(mMapX, mMapY);
+	
 	message_Queue.clear();
 
-	CalcVision();
+	//CalcVision();
 	
 }
 
@@ -146,3 +155,20 @@ bool CharacterPlayable::EnemyPresent(int x, int y, vector<Character*> npcSet){
 
 }
 
+bool CharacterPlayable::CoordsOutOfBounds(int x, int y){
+
+	/*if (x < 0 || x > TileMap::LEVEL_TILE_WIDTH-1 || y < 0 || y > TileMap::LEVEL_TILE_HEIGHT-1){
+	return true;
+	}
+	else{
+	return false;
+	}*/
+
+	if (x < 0 || x > m_collisionMap->size()-1|| y < 0 || y > m_collisionMap->size()-1){
+		return true;
+	}
+	else{
+		return false;
+	}
+
+}

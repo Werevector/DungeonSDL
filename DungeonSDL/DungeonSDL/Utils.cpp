@@ -24,23 +24,23 @@ string Utils::GetApplicationPath()
 	return appPath;
 }
 
-bool Utils::CoordsOutOfBounds(int x, int y){
-
-	/*if (x < 0 || x > TileMap::LEVEL_TILE_WIDTH-1 || y < 0 || y > TileMap::LEVEL_TILE_HEIGHT-1){
-		return true;
-	}
-	else{
-		return false;
-	}*/
-
-	if (x < 0 || x > 8 || y < 0 || y > 8){
-	return true;
-	}
-	else{
-	return false;
-	}
-
-}
+//bool Utils::CoordsOutOfBounds(int x, int y){
+//
+//	/*if (x < 0 || x > TileMap::LEVEL_TILE_WIDTH-1 || y < 0 || y > TileMap::LEVEL_TILE_HEIGHT-1){
+//		return true;
+//	}
+//	else{
+//		return false;
+//	}*/
+//
+//	if (x < 0 || x >  || y < 0 || y > 8){
+//	return true;
+//	}
+//	else{
+//	return false;
+//	}
+//
+//}
 
 //Bresenham alg, returns the output points
 vector<SDL_Point> Utils::Bresenham(int x1, int y1, int const x2, int const y2)
@@ -122,7 +122,7 @@ void Utils::RenderGameInfo(SDL_Rect* renderRect, TTF_Font* font){
 	Texture gTextTexture;
 
 	SDL_Color textColor = { 255, 255, 255 };
-	gTextTexture.loadFromRenderedText("Window Width: " + std::to_string(WINDOW_WIDTH), textColor, font);
+	gTextTexture.loadFromRenderedText("FrameTime: " + std::to_string(GAME_FRAME_TIME), textColor, font);
 	gTextTexture.render(renderRect->x+5, renderRect->y+5);
 
 	//textColor = { 255, 0, 0 };
@@ -130,7 +130,7 @@ void Utils::RenderGameInfo(SDL_Rect* renderRect, TTF_Font* font){
 	//gTextTexture.render(renderRect->x + 10, renderRect->y);
 
 	//textColor = { 255, 255, 255 };
-	gTextTexture.loadFromRenderedText("Window Height: " + std::to_string(WINDOW_HEIGHT), textColor, font);
+	gTextTexture.loadFromRenderedText("FPS: " + std::to_string(GAME_FPS), textColor, font);
 	gTextTexture.render(renderRect->x+5, renderRect->y+35);
 
 	//textColor = { 255, 0, 0 };

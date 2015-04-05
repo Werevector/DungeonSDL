@@ -17,31 +17,30 @@ bool DungeonStructure::LoadStructure(string loadPath, Textures gTileTextures)
 
 	DungeonRoom* newRoom;
 	newRoom = new DungeonRoom();
-	newRoom->BuildRoom(Utils::GetApplicationPath() + "\\start.map");
+	newRoom->BuildRoom(Utils::GetApplicationPath() + "\\dungeons\\newformat\\emptytile.map");
 	Character* NPC = new CharacterNonPlayable();
 	newRoom->AddNPC(NPC, 2, 5);
 	newRoom->AddGate(8,2,1);
 	newRoom->right = 1;
 	mRoomStructure.emplace(0, newRoom);
 	
-	DungeonRoom* newRoom2;
+	/*DungeonRoom* newRoom2;
 	newRoom2 = new DungeonRoom();
-	newRoom2->BuildRoom(Utils::GetApplicationPath() + "\\right.map");
+	newRoom2->BuildRoom(Utils::GetApplicationPath() + "\\dungeons\\newformat\\rightXLarge.map");
 	Character* NPC2 = new CharacterNonPlayable();
 	newRoom2->AddNPC(NPC2, 5, 5);
 	newRoom2->AddGate(8, 2, 1);
 	newRoom2->left = 0;
-	newRoom2->right = 2;
-	mRoomStructure.emplace(1, newRoom2);
+	mRoomStructure.emplace(1, newRoom2);*/
 
-	DungeonRoom* newRoom3;
+	/*DungeonRoom* newRoom3;
 	newRoom3 = new DungeonRoom();
-	newRoom3->BuildRoom(Utils::GetApplicationPath() + "\\right2.map");
+	newRoom3->BuildRoom(Utils::GetApplicationPath() + "\\dungeons\\oldformat\\rightLarge.map");
 	Character* NPC3 = new CharacterNonPlayable();
 	newRoom3->AddNPC(NPC3, 3, 6);
 	newRoom3->AddGate(8, 2, 1);
 	newRoom3->left = 1;
-	mRoomStructure.emplace(2, newRoom3);
+	mRoomStructure.emplace(2, newRoom3);*/
 
 
 

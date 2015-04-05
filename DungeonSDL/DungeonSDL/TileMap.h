@@ -29,17 +29,17 @@ public:
 	//static const int TILE_WIDTH = 64;
 	//static const int TILE_HEIGHT = 64;
 
-	/*static const int TILE_WIDTH = 16;
-	static const int TILE_HEIGHT = 16;*/
+	//static const int TILE_WIDTH = 16;
+	//static const int TILE_HEIGHT = 16;
 
-	static const int TOTAL_TILES = 81; 
-	static const int TOTAL_TILE_SPRITES = 10; 
+	int TOTAL_TILES; 
+	static const int TOTAL_TILE_SPRITES = 100; 
 
 	//The dimensions of the level 
-	static const int LEVEL_TILE_WIDTH = 9; 
-	static const int LEVEL_TILE_HEIGHT = 9; 
-	static const int LEVEL_WIDTH = TILE_WIDTH * 9; 
-	static const int LEVEL_HEIGHT = TILE_HEIGHT * 9; 
+	int LEVEL_TILE_WIDTH; 
+	int LEVEL_TILE_HEIGHT; 
+	int LEVEL_WIDTH; 
+	int LEVEL_HEIGHT; 
 
 	//Constructor Destructor
 	TileMap(void);
@@ -64,6 +64,10 @@ private:
 	Textures gTileTextures;
 	
 	Texture *mTileTextureAtlas;
+
+	void ClipSheet();
+	bool ReadTypeMap(ifstream*);
+	void ReservePositions(int, int);
 
 	vector< vector<SDL_Rect> > mTilePostions;
 };
