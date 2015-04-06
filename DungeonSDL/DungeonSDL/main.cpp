@@ -240,6 +240,7 @@ int main( int argc, char* args[] )
 			double time = std::chrono::duration<double, std::milli>(t_end - t_start).count();
 			GAME_FRAME_TIME = time;
 			time = time / 1000;
+			time = ceil(time);
 			time = 1 / time;
 			time = time * (0.9 + (gTimer.DeltaTime() / 1000) * 0.1);
 			GAME_FPS = time;

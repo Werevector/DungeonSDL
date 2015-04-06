@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ActMessage.h" />
+    <ClInclude Include="AStarPathFinder.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterNonPlayable.h" />
     <ClInclude Include="CharacterPlayable.h" />
@@ -89,6 +90,9 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="NodeField.h" />
+    <ClInclude Include="NodeList.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Tile.h" />

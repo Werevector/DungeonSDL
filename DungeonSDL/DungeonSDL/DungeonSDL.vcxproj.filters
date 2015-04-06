@@ -25,6 +25,9 @@
     <Filter Include="Source Files\GlobalUtils">
       <UniqueIdentifier>{c78b0bea-a32c-460b-a181-0f608ddebff5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\A-star">
+      <UniqueIdentifier>{5dc7600e-eb2a-4d6b-a133-c04eb7026079}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActMessage.h">
@@ -74,6 +77,18 @@
     </ClInclude>
     <ClInclude Include="TileTypeCodes.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Source Files\A-star</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeField.h">
+      <Filter>Source Files\A-star</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarPathFinder.h">
+      <Filter>Source Files\A-star</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeList.h">
+      <Filter>Source Files\A-star</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

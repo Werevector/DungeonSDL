@@ -122,7 +122,7 @@ void Utils::RenderGameInfo(SDL_Rect* renderRect, TTF_Font* font){
 	Texture gTextTexture;
 
 	SDL_Color textColor = { 255, 255, 255 };
-	gTextTexture.loadFromRenderedText("FrameTime: " + std::to_string(GAME_FRAME_TIME), textColor, font);
+	gTextTexture.loadFromRenderedText("FrameTime: " + std::to_string((int)GAME_FRAME_TIME), textColor, font);
 	gTextTexture.render(renderRect->x+5, renderRect->y+5);
 
 	//textColor = { 255, 0, 0 };
@@ -130,7 +130,7 @@ void Utils::RenderGameInfo(SDL_Rect* renderRect, TTF_Font* font){
 	//gTextTexture.render(renderRect->x + 10, renderRect->y);
 
 	//textColor = { 255, 255, 255 };
-	gTextTexture.loadFromRenderedText("FPS: " + std::to_string(GAME_FPS), textColor, font);
+	gTextTexture.loadFromRenderedText("FPS: " + std::to_string((int)GAME_FPS), textColor, font);
 	gTextTexture.render(renderRect->x+5, renderRect->y+35);
 
 	//textColor = { 255, 0, 0 };
