@@ -7,6 +7,8 @@
 #include "GameState.h"
 //#include "TileMap.h"
 #include <vector>
+#include "GameTimer.h"
+
 using namespace std;
 
 class Utils
@@ -23,8 +25,18 @@ public:
 	
 	static vector<SDL_Point*> A_Star_PathCalc(int, int, int, int, vector< vector<bool> >);
 
-	static void RenderGameInfo(SDL_Rect*, TTF_Font*);
+	//static void RenderGameInfo(SDL_Rect*, TTF_Font*);
 
+	static void CalculateFrameStats(GameTimer timer, float &fps, float &mspf);
+	//static float GetFramePerSecond();
+	//static float GetFrameCount();
+
+private:
+	//static int frameCnt;
+	//static float timeElapsed;
+
+	//float fps;
+	//float mspf;
 
 };
 

@@ -11,7 +11,7 @@ Character::Character(void)
 	mMapX = 0;
 	mMapY = 0;
 
-	health = 5;
+	mHealth = 5;
 	IS_DEAD = false;
 
 	m_VisionMap = vector<std::vector<bool>>(9, std::vector<bool>(9));
@@ -55,11 +55,13 @@ void Character::SetCollisionMap(vector< vector<bool> >* collMap){
 	m_collisionMap = collMap;
 }
 
+
 void Character::setLightPassableMap(vector< vector<bool> >* lightMap){
 	mLightPassageMap = lightMap;
 	m_VisionMap = vector<std::vector<bool>>(lightMap->size(), std::vector<bool>(lightMap->size()));
 	CalcVision();
 }
+
 
 void Character::CalcVision(){
 
@@ -89,39 +91,67 @@ void Character::CalcVision(){
 
 }
 
+
 vector< vector<bool> >* Character::getVisionMapP(){
 	return &m_VisionMap;
 }
+
 
 int Character::getmMapX(){
 	return mMapX;
 }
 
+
 int Character::getmMapY(){
 	return mMapY;
 }
+
 
 void Character::FlipX(){
 	mMapX = abs( mMapX - 9 + 1 );
 }
 
+
 void Character::FlipY(){
 	mMapY = abs( mMapY - 9 + 1 );
 }
 
+
 void Character::CalcDamage(int damage){
-	health -= damage;
-	if (health < 0){
+	mHealth -= damage;
+	if (mHealth < 0){
 		IS_DEAD = true;
 	}
 }
+
 
 void Character::AddActMessage(actMessage new_msg)
 {
 	message_Queue.push_back(new_msg);
 }
 
+
 bool Character::IsDead(){
 	return IS_DEAD;
 }
+
+
+int Character::GetMapPositionX()
+{
+	return mMapX;
+}
+
+
+int Character::GetMapPositionY()
+{
+	return mMapY;
+}
+
+
+int Character::GetHealth()
+{
+	return mHealth;
+}
+
+
 

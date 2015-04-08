@@ -31,6 +31,10 @@ public:
 	void FlipX();
 	void FlipY();
 
+	int GetMapPositionX();
+	int GetMapPositionY();
+	int GetHealth();
+
 	virtual void Render() = 0;
 	virtual void Update(vector<Character*>&) = 0;
 
@@ -44,7 +48,7 @@ protected:
 	int mMapX;
 	int mMapY;
 
-	int health;
+	int mHealth;
 	int strength;
 
 	bool damageTaken;

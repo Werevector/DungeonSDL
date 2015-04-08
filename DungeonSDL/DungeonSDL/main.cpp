@@ -21,23 +21,25 @@
 #include "ActMessage.h"
 
 #include "GameState.h"
+#include "gui.h"
 
 using namespace std;
 
 Textures gTileTextures;
-
 Texture gtex;
 
 GameTimer gTimer;
-
+Gui *gGui;
 World *gWorld;
+
 
 SDL_Event gEvent;
 
-TTF_Font * gFont = NULL;
+TTF_Font *gFont = NULL;
+int gFontSize = 15;
 
-SDL_Rect gWindowRect;
-SDL_Rect gGameInfoRect;
+//SDL_Rect gWindowRect;
+//SDL_Rect gGameInfoRect;
 
 float keyTime = 0;
 const float keyDelay = 0.12;
@@ -57,12 +59,12 @@ bool Init()
 
 	TTF_Init();
 
-	SDL_GetWindowSize(Graphics::gWindow, &gWindowRect.w, &gWindowRect.h);
+	//SDL_GetWindowSize(Graphics::gWindow, &gWindowRect.w, &gWindowRect.h);
 
-	gGameInfoRect.x = 50;
-	gGameInfoRect.y = gWindowRect.h - 200;
-	gGameInfoRect.w = gWindowRect.w - 100;
-	gGameInfoRect.h = 100;
+	//gGameInfoRect.x = 50;
+	//gGameInfoRect.y = gWindowRect.h - 200;
+	//gGameInfoRect.w = gWindowRect.w - 100;
+	//gGameInfoRect.h = 100;
 	
 
 	return success;
@@ -74,7 +76,7 @@ bool loadMedia()
 	
 	string fontPath = Utils::GetApplicationPath() + "\\infoFont.ttf";
 
-	gFont = TTF_OpenFont( fontPath.c_str(), 28);
+	gFont = TTF_OpenFont(fontPath.c_str(), gFontSize);
 	if (gFont == NULL)
 	{
 		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -104,6 +106,17 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 }
+
+
+void Update_WorldData_To_GUI()
+{
+	int playerX;
+	int playerY;
+	int playerHealth;
+	gWorld->GetPlayerData(playerX, playerY, playerHealth);
+	gGui->SetPlayerData(playerX, playerY, playerHealth);
+}
+
 
 void Update(const Uint8* keystate, SDL_Event gEvent)
 {
@@ -153,17 +166,17 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 
 	if (keyPressed){
 		keyTime = keyDelay;
+		Update_WorldData_To_GUI();
 	}
 
-	if (keyTime > 0){
+	if (keyTime > 0)
 		keyTime -= gTimer.DeltaTime();
-		
-	}
-	else if (keyTime < 0){
+	else if (keyTime < 0)
 		keyTime = 0;
-	}
 
 	gWorld->Update();
+
+	gGui->UpdateFrameStats();
 
 }
 
@@ -181,8 +194,10 @@ int main( int argc, char* args[] )
 
 		loadMedia();
 
-		gWorld = new World();
+		gGui = new Gui(gFont, &gTimer);
+		gWorld = new World();	
 		
+
 		/***************************
 		Manual object init for testing
 		****************************/
@@ -206,15 +221,15 @@ int main( int argc, char* args[] )
 				}
 
 				if (gEvent.window.event == SDL_WINDOWEVENT_RESIZED){
-					WINDOW_WIDTH = gEvent.window.data1;
-					WINDOW_HEIGHT = gEvent.window.data2;
+					//WINDOW_WIDTH = gEvent.window.data1;
+					//WINDOW_HEIGHT = gEvent.window.data2;
 
-					SDL_GetWindowSize(Graphics::gWindow, &gWindowRect.w, &gWindowRect.h);
+					//SDL_GetWindowSize(Graphics::gWindow, &gWindowRect.w, &gWindowRect.h);
 
-					gGameInfoRect.x = 50;
-					gGameInfoRect.y = gWindowRect.h - 200;
-					gGameInfoRect.w = gWindowRect.w - 100;
-					gGameInfoRect.h = 100;
+					//gGameInfoRect.x = 50;
+					//gGameInfoRect.y = gWindowRect.h - 200;
+					//gGameInfoRect.w = gWindowRect.w - 100;
+					//gGameInfoRect.h = 100;
 
 				}
 			}//EventWhile
@@ -231,28 +246,11 @@ int main( int argc, char* args[] )
 			SDL_SetRenderDrawColor( Graphics::gRenderer, 0x00, 0x00, 0x00, 0xFF );
 			SDL_RenderClear( Graphics::gRenderer );
 			
-			SDL_SetRenderDrawColor(Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-			SDL_RenderDrawRect( Graphics::gRenderer, &gGameInfoRect);
-
 			gWorld->Render();
-
-			auto t_end = std::chrono::high_resolution_clock::now();
-			double time = std::chrono::duration<double, std::milli>(t_end - t_start).count();
-			GAME_FRAME_TIME = time;
-			time = time / 1000;
-			time = ceil(time);
-			time = 1 / time;
-			time = time * (0.9 + (gTimer.DeltaTime() / 1000) * 0.1);
-			GAME_FPS = time;
-
-			Utils::RenderGameInfo(&gGameInfoRect, gFont);
-
+			gGui->Render();
 
 			SDL_RenderPresent( Graphics::gRenderer );
-			
-			
-			
-
+							
 		}
 	}
 

@@ -117,31 +117,44 @@ vector<SDL_Point> Utils::Bresenham(int x1, int y1, int const x2, int const y2)
 
 }
 
-void Utils::RenderGameInfo(SDL_Rect* renderRect, TTF_Font* font){
-
-	Texture gTextTexture;
-
-	SDL_Color textColor = { 255, 255, 255 };
-	gTextTexture.loadFromRenderedText("FrameTime: " + std::to_string((int)GAME_FRAME_TIME), textColor, font);
-	gTextTexture.render(renderRect->x+5, renderRect->y+5);
-
-	//textColor = { 255, 0, 0 };
-	//gTextTexture.loadFromRenderedText(std::to_string(WINDOW_WIDTH), textColor, font);
-	//gTextTexture.render(renderRect->x + 10, renderRect->y);
-
-	//textColor = { 255, 255, 255 };
-	gTextTexture.loadFromRenderedText("FPS: " + std::to_string((int)GAME_FPS), textColor, font);
-	gTextTexture.render(renderRect->x+5, renderRect->y+35);
-
-	//textColor = { 255, 0, 0 };
-	//gTextTexture.loadFromRenderedText(std::to_string(WINDOW_HEIGHT), textColor, font);
-	//gTextTexture.render(renderRect->x + 10, renderRect->y+20);
-
-	gTextTexture.free();
-
-}
-
 //vector<SDL_Point*> Utils::A_Star_PathCalc(int originX, int originY, int TargetX, int TargetY, vector<vector<bool>> map){
 //	return 
 //}
 
+void Utils::CalculateFrameStats(GameTimer timer, float &fps, float &mspf)
+{
+	static int frameCnt = 0;
+	static float timeElapsed = 0.0f;
+
+	frameCnt++;
+
+	// Compute averages over one second period.
+	if ((timer.TotalTime() - timeElapsed) >= 1.0f)
+	{
+		fps = (float)frameCnt; // fps = frameCnt / 1
+		mspf = 1000.0f / fps;
+
+		//std::wostringstream outs;
+		//outs.precision(6);
+		//outs << mMainWndCaption << L"    "
+		//	<< L"FPS: " << fps << L"    "
+		//	<< L"Frame Time: " << mspf << L" (ms)";
+		//SetWindowText(mhMainWnd, outs.str().c_str());
+
+		// Reset for next average.
+		frameCnt = 0;
+		timeElapsed += 1.0f;
+	}
+}
+
+
+//float Utils::GetFramePerSecond()
+//{
+//	return fps;
+//}
+//
+//
+//float Utils::GetFrameCount()
+//{
+//	return mspf;
+//}

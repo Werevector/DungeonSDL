@@ -35,6 +35,8 @@ public:
 	//Delegate message based on ID, currently only delegates to hero
 	void DelegateMSG(actMessage);
 
+	void GetPlayerData(int &playerX, int &playerY, int &health);
+
 	void Update();
 	void Render();
 
