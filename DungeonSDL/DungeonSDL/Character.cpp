@@ -12,6 +12,8 @@ Character::Character(void)
 	mMapY = 0;
 
 	mHealth = 5;
+	mHealthMax = 10;
+
 	IS_DEAD = false;
 
 	m_VisionMap = vector<std::vector<bool>>(9, std::vector<bool>(9));
@@ -151,6 +153,12 @@ int Character::GetMapPositionY()
 int Character::GetHealth()
 {
 	return mHealth;
+}
+
+
+int Character::GetHealthMax()
+{
+	return mHealthMax;
 }
 
 

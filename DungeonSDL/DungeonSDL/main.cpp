@@ -113,8 +113,9 @@ void Update_WorldData_To_GUI()
 	int playerX;
 	int playerY;
 	int playerHealth;
-	gWorld->GetPlayerData(playerX, playerY, playerHealth);
-	gGui->SetPlayerData(playerX, playerY, playerHealth);
+	int playerHealthMax;
+	gWorld->GetPlayerData(playerX, playerY, playerHealth, playerHealthMax);
+	gGui->SetPlayerData(playerX, playerY, playerHealth, playerHealthMax);
 }
 
 
@@ -195,7 +196,7 @@ int main( int argc, char* args[] )
 		loadMedia();
 
 		gGui = new Gui(gFont, &gTimer);
-		gWorld = new World();	
+		gWorld = new World();
 		
 
 		/***************************
@@ -206,6 +207,8 @@ int main( int argc, char* args[] )
 
 		/***************************
 		****************************/
+
+		Update_WorldData_To_GUI();
 
 
 		bool quit = false;
@@ -221,8 +224,8 @@ int main( int argc, char* args[] )
 				}
 
 				if (gEvent.window.event == SDL_WINDOWEVENT_RESIZED){
-					//WINDOW_WIDTH = gEvent.window.data1;
-					//WINDOW_HEIGHT = gEvent.window.data2;
+					WINDOW_WIDTH = gEvent.window.data1;
+					WINDOW_HEIGHT = gEvent.window.data2;
 
 					//SDL_GetWindowSize(Graphics::gWindow, &gWindowRect.w, &gWindowRect.h);
 
@@ -235,7 +238,7 @@ int main( int argc, char* args[] )
 			}//EventWhile
 
 
-			auto t_start = std::chrono::high_resolution_clock::now();
+			//auto t_start = std::chrono::high_resolution_clock::now();
 			
 			const Uint8* keystate = SDL_GetKeyboardState(NULL);
 

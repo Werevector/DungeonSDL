@@ -14,7 +14,7 @@ public:
 	Gui(TTF_Font *font, GameTimer* timer);
 	~Gui();
 
-	void SetPlayerData(int playerX, int playerY, int playerHealth);
+	void SetPlayerData(int playerX, int playerY, int playerHealth, int playerHealthMax);
 
 	void UpdateFrameStats();
 	void Render();
@@ -45,6 +45,8 @@ private:
 	int mPlayerX;
 	int mPlayerY;
 	int mPlayerHealth;
+	int mPlayerHealthPercent;
+	int mPlayerHealthMax;
 
 	SDL_Color mTextColor;
 

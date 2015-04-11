@@ -23,7 +23,7 @@ Gui::Gui(TTF_Font *font, GameTimer* timer)
 	mTextColor = { 255, 255, 255 };
 
 	mPlayerHealthBar_X_offset = 400;
-	mPlayerHealthBar_Y_offset = WINDOW_HEIGHT - 120;
+	mPlayerHealthBar_Y_offset = 120;
 	mPlayerHealthBar_Width = 120;
 	mPlayerHealthBar_Height = 25;
 
@@ -55,15 +55,18 @@ void Gui::Render()
 
 void Gui::RenderPlayerHealthBar()
 {
-	
-	SDL_Rect playerHeathBarFrame = { mPlayerHealthBar_X_offset, 
-								     mPlayerHealthBar_Y_offset, 
+
+	int barPercentWidth = (mPlayerHealthBar_Width - 2);
+	barPercentWidth = ((barPercentWidth * mPlayerHealthPercent) / 100);
+
+	SDL_Rect playerHeathBarFrame = { WINDOW_WIDTH - mPlayerHealthBar_X_offset,
+									 WINDOW_HEIGHT - mPlayerHealthBar_Y_offset,
 									 mPlayerHealthBar_Width, 
 									 mPlayerHealthBar_Height };
 
-	SDL_Rect playerHeathBarRect = { mPlayerHealthBar_X_offset + 1, 
-									mPlayerHealthBar_Y_offset + 1, 
-									mPlayerHealthBar_Width - 2, 
+	SDL_Rect playerHeathBarRect = { WINDOW_WIDTH - mPlayerHealthBar_X_offset + 1,
+									WINDOW_HEIGHT - mPlayerHealthBar_Y_offset + 1,
+									barPercentWidth,
 									mPlayerHealthBar_Height - 2 };
 
 	SDL_SetRenderDrawColor(Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -71,6 +74,16 @@ void Gui::RenderPlayerHealthBar()
 
 	SDL_SetRenderDrawColor(Graphics::gRenderer, 0xFF, 0x00, 0x00, 0xFF);
 	SDL_RenderFillRect(Graphics::gRenderer, &playerHeathBarRect);
+
+	Texture gTextTexture;
+	gTextTexture.loadFromRenderedText((std::to_string((int)mPlayerHealthPercent) + "%"), mTextColor, mFont);
+
+	//TODO Jan: Find text width and height for correct text position 
+	//gTextTexture.render(mPlayerHealthBar_X_offset + (mPlayerHealthBar_Width / 2), 
+	//					mPlayerHealthBar_Y_offset + (mPlayerHealthBar_Height / 2));
+
+	gTextTexture.render(WINDOW_WIDTH - mPlayerHealthBar_X_offset + 55,
+						WINDOW_HEIGHT - mPlayerHealthBar_Y_offset + 5);
 
 }
 
@@ -99,9 +112,15 @@ void Gui::RenderSidebarText()
 }
 
 
-void Gui::SetPlayerData(int playerX, int playerY, int playerHealth)
+void Gui::SetPlayerData(int playerX, int playerY, int playerHealth, int playerHealthMax)
 {
 	mPlayerX = playerX;
 	mPlayerY = playerY;
 	mPlayerHealth = playerHealth;
+	mPlayerHealthMax = playerHealthMax;
+
+	if (mPlayerHealth == 0 || mPlayerHealthMax == 0)
+		mPlayerHealthPercent = 0;
+	else 
+		mPlayerHealthPercent = ((float)mPlayerHealth / (float)mPlayerHealthMax) * 100;
 }

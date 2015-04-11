@@ -34,6 +34,7 @@ public:
 	int GetMapPositionX();
 	int GetMapPositionY();
 	int GetHealth();
+	int GetHealthMax();
 
 	virtual void Render() = 0;
 	virtual void Update(vector<Character*>&) = 0;
@@ -49,6 +50,7 @@ protected:
 	int mMapY;
 
 	int mHealth;
+	int mHealthMax;
 	int strength;
 
 	bool damageTaken;

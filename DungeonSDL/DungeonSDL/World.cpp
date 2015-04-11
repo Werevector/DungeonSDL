@@ -154,12 +154,13 @@ void World::DelegateMSG(actMessage message){
 }
 
 
-void World::GetPlayerData(int &playerX, int &playerY, int &health)
+void World::GetPlayerData(int &playerX, int &playerY, int &health, int &healthMax)
 {
 	if (mCharacters.size() != 0)
 	{
 		playerX = mCharacters[0]->GetMapPositionX();
 		playerY = mCharacters[0]->GetMapPositionX();
 		health = mCharacters[0]->GetHealth();
+		healthMax = mCharacters[0]->GetHealthMax();
 	}
 }
