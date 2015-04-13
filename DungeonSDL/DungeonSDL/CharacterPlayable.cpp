@@ -4,6 +4,7 @@
 CharacterPlayable::CharacterPlayable()
 {
 	strength = 2;
+	mTargetNPC = 0;
 }
 
 
@@ -16,6 +17,9 @@ void CharacterPlayable::Render()
 {
 	SDL_SetRenderDrawColor( Graphics::gRenderer, 0xFF, 0x33, 0x33, 0xFF );		
 	SDL_RenderFillRect( Graphics::gRenderer, &mCharacter );
+
+	for (int i = 0; i < m_BowArrows.size(); i++)
+		m_BowArrows[i]->Render();
 }
 
 
@@ -118,6 +122,12 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 
 			}
 			break;
+		case AIM_AND_SHOOT_BOW:
+
+			if (npcSet.size() > 0)
+				ShootBowArrow(npcSet[0]);
+
+
 		case DEFAULT:
 			break;
 		}
@@ -128,6 +138,14 @@ void CharacterPlayable::Update(vector<Character*>& npcSet)
 		CalcVision();
 	}
 	SetMapPosition(mMapX, mMapY);
+
+
+
+	for (int i = 0; i < m_BowArrows.size(); i++)
+		m_BowArrows[i]->Update();
+
+
+
 	
 	message_Queue.clear();
 
@@ -142,8 +160,8 @@ bool CharacterPlayable::EnemyPresent(int x, int y, vector<Character*> npcSet){
 	
 	for (auto npc = npcSet.begin(); npc != npcSet.end(); ++npc){
 		
-		int npcX = (*npc)->getmMapX();
-		int npcY = (*npc)->getmMapY();
+		int npcX = (*npc)->GetMapPositionX();
+		int npcY = (*npc)->GetMapPositionY();
 
 		if (npcX == x && npcY == y){
 			mTargetNPC = (*npc);
@@ -170,5 +188,20 @@ bool CharacterPlayable::CoordsOutOfBounds(int x, int y){
 	else{
 		return false;
 	}
+
+}
+
+
+void CharacterPlayable::ShootBowArrow(Character* targetNPC)
+{
+	//mTargetNPC
+
+	PlayerBowArrow *arrow;
+	arrow = new PlayerBowArrow();
+	arrow->SetPosition(mPosX, mPosY);
+	arrow->SetTarget(targetNPC);
+	arrow->CalculateTravelAngle();
+
+	m_BowArrows.push_back(arrow);
 
 }

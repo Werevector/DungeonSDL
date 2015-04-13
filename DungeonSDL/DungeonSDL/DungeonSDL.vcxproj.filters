@@ -28,6 +28,9 @@
     <Filter Include="Source Files\A-star">
       <UniqueIdentifier>{5dc7600e-eb2a-4d6b-a133-c04eb7026079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Projectiles">
+      <UniqueIdentifier>{33ace57a-5b45-4ac2-bf40-c2627f000c21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActMessage.h">
@@ -93,6 +96,12 @@
     <ClInclude Include="gui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBowArrow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameTimer.cpp">
@@ -142,6 +151,12 @@
     </ClCompile>
     <ClCompile Include="gui.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBowArrow.cpp">
+      <Filter>Source Files\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

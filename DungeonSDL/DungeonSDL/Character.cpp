@@ -10,6 +10,8 @@ Character::Character(void)
 
 	mMapX = 0;
 	mMapY = 0;
+	mPosX = 0;
+	mPosY = 0;
 
 	mHealth = 5;
 	mHealthMax = 10;
@@ -38,11 +40,17 @@ void Character::SetMapPosition(int x, int y)
 	if(!mMapTilePositions.empty())
 	{
 		mCurrentTile = mMapTilePositions[x][y];
-		mCharacter.x = mCurrentTile.x - mCharacter.w / 2;
-		mCharacter.y = mCurrentTile.y - mCharacter.h / 2;
 
+		mPosX = mCurrentTile.x;
+		mPosY = mCurrentTile.y;
+		//mPosX += WINDOW_CENTER_OFFSET_X;
+		//mPosY += WINDOW_CENTER_OFFSET_Y;
+
+		mCharacter.x = mCurrentTile.x;// -mCharacter.w / 2;
+		mCharacter.y = mCurrentTile.y;// -mCharacter.h / 2;
 		mCharacter.x += WINDOW_CENTER_OFFSET_X;
 		mCharacter.y += WINDOW_CENTER_OFFSET_Y;
+
 	}
 }
 
@@ -99,16 +107,6 @@ vector< vector<bool> >* Character::getVisionMapP(){
 }
 
 
-int Character::getmMapX(){
-	return mMapX;
-}
-
-
-int Character::getmMapY(){
-	return mMapY;
-}
-
-
 void Character::FlipX(){
 	mMapX = abs( mMapX - 9 + 1 );
 }
@@ -147,6 +145,18 @@ int Character::GetMapPositionX()
 int Character::GetMapPositionY()
 {
 	return mMapY;
+}
+
+
+int Character::GetPositionX()
+{
+	return mPosX;
+}
+
+
+int Character::GetPositionY()
+{
+	return mPosY;
 }
 
 

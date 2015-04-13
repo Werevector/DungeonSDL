@@ -2,6 +2,8 @@
 
 #include "Character.h"
 #include "GameState.h"
+#include "PlayerBowArrow.h"
+
 
 class CharacterPlayable :
 	public Character
@@ -17,8 +19,12 @@ public:
 
 protected:
 
+	void ShootBowArrow(Character*);
+
 	Character* mTargetNPC;
 
 	bool EnemyPresent(int, int, vector<Character*>);
 	bool CoordsOutOfBounds(int, int);
+
+	vector<PlayerBowArrow*> m_BowArrows;
 };

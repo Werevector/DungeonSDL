@@ -165,6 +165,13 @@ void Update(const Uint8* keystate, SDL_Event gEvent)
 		}
 	}
 
+	if (keystate[SDL_SCANCODE_P])
+	{
+		actorMessage.type = messageType::AIM_AND_SHOOT_BOW;
+		gWorld->DelegateMSG(actorMessage);
+		keyPressed = true;
+	}
+
 	if (keyPressed){
 		keyTime = keyDelay;
 		Update_WorldData_To_GUI();
@@ -241,10 +248,9 @@ int main( int argc, char* args[] )
 			//auto t_start = std::chrono::high_resolution_clock::now();
 			
 			const Uint8* keystate = SDL_GetKeyboardState(NULL);
-
-			gTimer.Tick();
-
 			Update(keystate, gEvent);
+
+			gTimer.Tick();		
 
 			SDL_SetRenderDrawColor( Graphics::gRenderer, 0x00, 0x00, 0x00, 0xFF );
 			SDL_RenderClear( Graphics::gRenderer );

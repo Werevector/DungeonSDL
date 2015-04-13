@@ -23,16 +23,18 @@ public:
 	void SetMapTilePositions(vector< vector<SDL_Rect> > tilePositions);
 	void SetCollisionMap(vector< vector<bool> >*);
 
-	int getmMapX();
-	int getmMapY();
+	//int getmMapX();
+	//int getmMapY();
+	int GetMapPositionX();
+	int GetMapPositionY();
+	int GetPositionX();
+	int GetPositionY();
 
 	void AddActMessage(actMessage);
 
 	void FlipX();
 	void FlipY();
 
-	int GetMapPositionX();
-	int GetMapPositionY();
 	int GetHealth();
 	int GetHealthMax();
 
@@ -48,6 +50,8 @@ protected:
 	
 	int mMapX;
 	int mMapY;
+	int mPosX;
+	int mPosY;
 
 	int mHealth;
 	int mHealthMax;
@@ -56,8 +60,7 @@ protected:
 	bool damageTaken;
 	bool IS_DEAD;
 
-	/*int mPosX;
-	int mPosY;*/
+
 
 	SDL_Rect mCharacter;
 	SDL_Rect mCurrentTile;

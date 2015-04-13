@@ -64,6 +64,7 @@ void World::Update()
 		(*character)->Update(mCharacters);
 	}
 
+	//TODO Jan: Testing persistent dead bodies
 	for (int i = 0; i < mNonPlayableCharacters->size(); i++){
 
 		if ((*mNonPlayableCharacters)[i]->IsDead()){
@@ -126,7 +127,7 @@ void World::Render()
 
 	for (int i = 0; i < mNonPlayableCharacters->size(); i++){
 		
-		bool isVisible = (*playerVision)[(*mNonPlayableCharacters)[i]->getmMapX()][(*mNonPlayableCharacters)[i]->getmMapY()];
+		bool isVisible = (*playerVision)[(*mNonPlayableCharacters)[i]->GetMapPositionX()][(*mNonPlayableCharacters)[i]->GetMapPositionY()];
 		
 		if (isVisible)
 		{

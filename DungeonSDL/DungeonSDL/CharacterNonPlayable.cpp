@@ -25,6 +25,11 @@ void CharacterNonPlayable::Render()
 		
 		damageTaken = false;
 	}
+	//else
+	//{
+	//	SDL_SetRenderDrawColor(Graphics::gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	//	SDL_RenderFillRect(Graphics::gRenderer, &mCharacter);
+	//}
 
 }
 
@@ -65,8 +70,8 @@ void CharacterNonPlayable::ReactToPlayerAction(vector<Character*> playerChars)
 
 	for (int i = 0; i < playerChars.size(); i++)
 	{
-		playerX = playerChars[i]->getmMapX();
-		playerY = playerChars[i]->getmMapY();
+		playerX = playerChars[i]->GetMapPositionX();
+		playerY = playerChars[i]->GetMapPositionY();
 
 		if (mMapX == playerX)
 		{

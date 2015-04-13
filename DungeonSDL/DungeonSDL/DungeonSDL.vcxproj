@@ -94,6 +94,8 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodeField.h" />
     <ClInclude Include="NodeList.h" />
+    <ClInclude Include="PlayerBowArrow.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Tile.h" />
@@ -113,6 +115,8 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerBowArrow.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Tile.cpp" />
