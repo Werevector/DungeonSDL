@@ -13,7 +13,7 @@ PlayerBowArrow::PlayerBowArrow()
 
 	mTargetNPC = 0;
 
-	mForwardSpeed = 3;
+	mForwardSpeed = 500;
 
 	dx = 0;
 	dy = 0;
@@ -36,8 +36,8 @@ void PlayerBowArrow::Render()
 void PlayerBowArrow::Update()
 {
 
-	int dx = cosf(mAngle) * (float)mForwardSpeed;
-	int dy = sinf(mAngle) * (float)mForwardSpeed;
+	int dx = cosf(mAngle) * mForwardSpeed*GAME_FRAMEDELTA;
+	int dy = -sinf(mAngle) * mForwardSpeed*GAME_FRAMEDELTA;
 
 	mPosX += dx;
 	mPosY += dy;
@@ -77,7 +77,7 @@ void PlayerBowArrow::CalculateTravelAngle()
 	int cx = x2 - x1;
 	int cy = y2 - y1;
 
-	mAngle = atan2(cy, cx);
+	mAngle = -atan2f(cy, cx);
 
 	//mAngle = 2.35619449f;
 

@@ -248,6 +248,7 @@ int main( int argc, char* args[] )
 			//auto t_start = std::chrono::high_resolution_clock::now();
 			
 			const Uint8* keystate = SDL_GetKeyboardState(NULL);
+			GAME_FRAMEDELTA = gTimer.DeltaTime();
 			Update(keystate, gEvent);
 
 			gTimer.Tick();		
